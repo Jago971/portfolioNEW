@@ -17,47 +17,65 @@ function expandSections(width) {
 //text
 function fadeDownTextEffect(parent, sentence) {
   sentence.split("").forEach((character, index) => {
-    const span = document.createElement("span");
-    span.textContent = character === " " ? "\u00A0" : character;
-    span.style.animationDelay = `${index * 0.03}s`;
-    parent.appendChild(span);
+    const element = document.createElement("span");
+
+    if (specialCharRegex.test(character)) {
+      element.classList.add("special-character");
+    }
+
+    element.textContent = character === " " ? "\u00A0" : character;
+    element.style.animationDelay = `${index * 0.03}s`;
+    element.classList.add("hero-name-character");
+    parent.appendChild(element);
   });
 }
 
 function typeWriterTextEffect(parent, sentence) {
-  if(sentence.length > 0) {
+  if (sentence.length > 0) {
     const character = sentence.split("").shift();
-    caret.insertAdjacentText("beforebegin", character);
+
+    if (specialCharRegex.test(character)) {
+      const element = document.createElement("span");
+      element.textContent = character;
+      element.classList.add("special-character");
+      parent.insertAdjacentElement("beforeend", element);
+    } else {
+      parent.insertAdjacentText("beforeend", character);
+    }
+
+    parent.appendChild(caret);
+
     setTimeout(() => {
-      typeWriterTextEffect(parent, sentence.slice(1))
-    }, 100)
+      typeWriterTextEffect(parent, sentence.slice(1));
+    }, 80);
   }
 }
 
 //execution
 const wrap = document.querySelector(".wrap");
 const sections = document.querySelectorAll(".wrap div");
-const heroName = document.querySelector(".hero p");
+const heroName = document.querySelector(".hero-section p");
 const heroTextGrid = document.querySelector(".hero-text-grid");
-const heroText = document.querySelectorAll(".hero div p")
+const heroText = document.querySelectorAll(".hero-text p");
 const caret = document.querySelector(".caret");
+const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
 
 const heroInputs = [
   "Hey, I'm Matt.",
-  "I'm focused on mastering full-stack development.",
+  "I'm developing my expertise in full-stack development.",
 ];
 
 fadeDownTextEffect(heroName, heroInputs[0]);
 
 setTimeout(() => {
-  heroText[0].textContent = heroInputs[1];
+  heroText[0].innerHTML = heroInputs[1] + "<span style='font-weight: bold;'>|</span>";
   heroTextGrid.style.gridTemplateRows = "1fr";
-}, 1000);
+}, 2000);
 
 setTimeout(() => {
   caret.style.display = "inline-block";
-})
+});
 
 setTimeout(() => {
-  typeWriterTextEffect(heroText[1], heroInputs[1])
-}, 3000)
+  typeWriterTextEffect(heroText[1], heroInputs[1]);
+}, 3500);
