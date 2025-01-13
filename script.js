@@ -1,9 +1,11 @@
 //sections
 function expandSections() {
-  sections.forEach((section) => {
-    section.style.display = "flex";
-  });
   changeGridOrientation(window.innerWidth)
+  setTimeout (() => {
+    sections.forEach((section) => {
+      section.style.display = "flex";
+    });
+  }, 2000)
 }
 
 function changeGridOrientation(width) {
@@ -19,8 +21,8 @@ function changeGridOrientation(width) {
 const body = document.querySelector("body")
 const sections = document.querySelectorAll("section")
 
-// expandSections()
+expandSections()
 
-// window.addEventListener("resize", function() {
-//   changeGridOrientation(window.innerWidth);
-// });
+window.addEventListener("resize", function() {
+  changeGridOrientation(window.innerWidth);
+});
