@@ -32,6 +32,10 @@ section {
   font-size: 4rem;
 }
 
+.hero-name div:nth-of-type(3) {
+  font-weight: 400;
+}
+
 .hero-name-character {
   display: inline-block;
   opacity: 0;
@@ -39,17 +43,16 @@ section {
   animation: fadeDownAnim 0.5s ease-in-out forwards
 }
 
-.hero-text-grid {
+.hero-text-grid, .icon-grid {
   grid-template-rows: 0fr;
   display: grid;
-  border-right: solid 0.15rem transparent;
   transition: grid-template-rows 0.75s ease-in-out;
   width: fit-content;
   margin: 0 auto;
   width: 100%;
 }
 
-.hero-text {
+.hero-text, .icons {
   position: relative;
   overflow: hidden;
   font-size: 2rem;
@@ -77,6 +80,27 @@ section {
   animation: blink 0.75s infinite;
 }
 
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+img {
+  height: 3rem;
+  margin: 1rem;
+  opacity: 0;
+}
+
+.cabinet {
+  display: none;
+}
+
+.call {
+  display: none;
+}
+
 @keyframes blink {
   0% {
     opacity: 1;
@@ -94,12 +118,4 @@ section {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.cabinet {
-  display: none;
-}
-
-.call {
-  display: none;
 }
