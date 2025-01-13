@@ -64,7 +64,7 @@ function typeWriterTextEffect(parent, sentence) {
 
     setTimeout(() => {
       typeWriterTextEffect(parent, sentence.slice(1));
-    }, 80);
+    }, 60);
   }
 }
 
@@ -111,4 +111,4 @@ setTimeout(() => {
 
 setTimeout(() => {
   fadeIconsIn()
-}, 7500)
+}, 6750)

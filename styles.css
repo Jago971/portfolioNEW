@@ -5,6 +5,12 @@
   font-family: Changa;
 }
 
+:root {
+  --font-size-1: clamp(2.5rem, 5vw, 5rem);
+  --font-size-2: clamp(2rem, 4vw, 4rem);
+  --font-size-3: clamp(1.5rem, 3vw, 3rem);
+}
+
 .wrap {
   height: 100vh;
   width: 100vw;
@@ -29,7 +35,7 @@ section {
 }
 
 .hero-name {
-  font-size: 4rem;
+  font-size: var(--font-size-1);
 }
 
 .hero-name div:nth-of-type(3) {
@@ -39,7 +45,7 @@ section {
 .hero-name-character {
   display: inline-block;
   opacity: 0;
-  transform: translateY(-2rem);
+  transform: translateY(-(var(--font-size-3)));
   animation: fadeDownAnim 0.5s ease-in-out forwards
 }
 
@@ -55,7 +61,7 @@ section {
 .hero-text, .icons {
   position: relative;
   overflow: hidden;
-  font-size: 2rem;
+  font-size: var(--font-size-3);
 }
 
 .hero-text p:nth-of-type(1) {
@@ -87,10 +93,18 @@ section {
   flex-wrap: wrap;
 }
 
-img {
-  height: 3rem;
-  margin: 1rem;
+.icons img {
+  height: var(--font-size-2);
+  margin: calc(var(--font-size-3) *  1.2);
   opacity: 0;
+}
+
+.icons img:nth-of-type(4) {
+  height: calc(var(--font-size-2) *  0.867);
+}
+
+.icons img:nth-of-type(5) {
+  height: calc(var(--font-size-2) *  0.7);
 }
 
 .cabinet {
