@@ -45,7 +45,7 @@ section {
 .hero-name-character {
   display: inline-block;
   opacity: 0;
-  transform: translateY(-(var(--font-size-3)));
+  transform: translateY(calc(var(--font-size-3) * -1));
   animation: fadeDownAnim 0.5s ease-in-out forwards
 }
 
