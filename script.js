@@ -37,9 +37,9 @@ function fadeDownTextEffect(parent, sentence) {
 }
 
 function exapndHeroSection() {
-  const contents = sections[1].querySelectorAll(".hero-text, .icons")
-  contents.forEach(element => {
-    element.style.flex = "auto 0 0"
+  const grids = sections[1].querySelectorAll(".grid-container")
+  grids.forEach(grid => {
+    grid.style.gridTemplateRows = "1fr"
   });
 }
 

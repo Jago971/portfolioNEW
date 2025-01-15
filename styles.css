@@ -65,10 +65,18 @@ section {
   transition: flex-grow 1s ease-in-out;
 }
 
-.hero-text, .hero-section > .icons {
-  flex: 0 0 0;
+.grid-container {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-in-out
+}
+
+.grid-container > * {
   overflow: hidden;
-  transition: flex 1s ease-in-out;
+}
+
+img {
+  height: 3rem
 }
 
 .hero-name-character {
@@ -79,12 +87,6 @@ section {
 }
 .special-character {
   color: lightseagreen;
-}
-
-.icons {
-  height: 3rem;
-  width: 100%;
-  background-color: gray;
 }
 
 .cabinet-section, .call-section {
