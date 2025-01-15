@@ -1,17 +1,6 @@
-"use strict";
-
-//sections
-function expandSections(width) {
-  sections.forEach((section) => {
-    section.style.display = "initial";
-  });
-  if (width >= 768) {
-    wrap.style.gridTemplateColumns = "1fr 1fr 1fr";
-    wrap.style.gridTemplateRows = "1fr";
-  } else {
-    wrap.style.gridTemplateColumns = "1fr";
-    wrap.style.gridTemplateRows = "1fr 2fr 1fr";
-  }
+//layout
+function expandSections() {
+  sections[0].style.flex = "0 0 0"
 }
 
 //text effects
@@ -47,68 +36,20 @@ function fadeDownTextEffect(parent, sentence) {
   });
 }
 
-function typeWriterTextEffect(parent, sentence) {
-  if (sentence.length > 0) {
-    const character = sentence.split("").shift();
-
-    if (specialCharRegex.test(character)) {
-      const element = document.createElement("span");
-      element.textContent = character;
-      element.classList.add("special-character");
-      parent.insertAdjacentElement("beforeend", element);
-    } else {
-      parent.insertAdjacentText("beforeend", character);
-    }
-
-    parent.appendChild(caret);
-
-    setTimeout(() => {
-      typeWriterTextEffect(parent, sentence.slice(1));
-    }, 60);
-  }
-}
-
-//icons
-function fadeIconsIn() {
-  icons.forEach((icon, index) => {
-    icon.style.animation = "fadeDownAnim 0.5s ease-in-out forwards"
-    icon.style.animationDelay = `${index * 0.1}s`;
+function exapndHeroSection() {
+  const grids = sections[1].querySelectorAll(".grid-container")
+  grids.forEach(grid => {
+    grid.style.gridTemplateRows = "1fr"
   });
 }
 
-//execution
-const wrap = document.querySelector(".wrap");
-const sections = document.querySelectorAll(".wrap div");
-const heroName = document.querySelector(".hero-section p");
-const heroTextGrid = document.querySelector(".hero-text-grid");
-const heroText = document.querySelectorAll(".hero-text p");
-const caret = document.querySelector(".caret");
+const sections = document.querySelectorAll("section")
 const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
-const iconGrid = document.querySelector(".icon-grid");
-const icons = document.querySelectorAll(".icons img");
-
 const heroInputs = [
   "Hey, I'm Matt.",
   "I'm developing my expertise in full-stack development.",
 ];
 
-fadeDownTextEffect(heroName, heroInputs[0]);
-
-setTimeout(() => {
-  heroText[0].innerHTML =
-    heroInputs[1] + "<span style='font-weight: bold;'>|</span>";
-  heroTextGrid.style.gridTemplateRows = "1fr";
-  iconGrid.style.gridTemplateRows = "1fr";
-}, 1250);
-
-setTimeout(() => {
-  caret.style.display = "inline-block";
-}, 2000);
-
-setTimeout(() => {
-  typeWriterTextEffect(heroText[1], heroInputs[1]);
-}, 3000);
-
-setTimeout(() => {
-  fadeIconsIn()
-}, 6750)
+fadeDownTextEffect(sections[1].querySelector("h1"), heroInputs[0])
+setTimeout(() => {exapndHeroSection()},2000)
+setTimeout(() => {expandSections()},5000)
