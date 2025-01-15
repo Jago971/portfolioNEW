@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border: solid 1px red
 }
 
 body {
@@ -77,6 +76,28 @@ section {
 
 img {
   height: 3rem
+}
+
+.hero-text {
+  position: relative;
+}
+
+.hero-text h2:nth-of-type(1) {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.hero-text h2:nth-of-type(2) {
+  color: transparent;
+}
+
+.caret {
+  display: none;
+  font-weight: bold;
+  color: lightseagreen;
+  animation: blink 0.75s infinite;
 }
 
 .hero-name-character {
