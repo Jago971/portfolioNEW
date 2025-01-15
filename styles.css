@@ -30,13 +30,16 @@ h2 {
   display: flex;
 }
 
+.wrapper > .blank {
+  flex-grow: 0.3;
+}
+
 section {
   display: flex;
   flex-direction: column;
 }
 
 .blank {
-  flex-grow: 0.3;
   transition: flex-grow 1s ease-in-out;
   background-color: blue;
 }
@@ -53,12 +56,19 @@ section {
   flex: 0.4 1 0;
 }
 
-.hero-section > *, .call-section > * {
+.hero-name {
+  align-content: end;
 }
 
-.hero-section > h1, .call-section > h1 {
-  height: 50%;
-  align-content: end;
+.hero-section > .blank {
+  flex-grow: 0.5;
+  transition: flex-grow 1s ease-in-out;
+}
+
+.hero-text, .hero-section > .icons {
+  flex: 0 0 0;
+  overflow: hidden;
+  transition: flex 1s ease-in-out;
 }
 
 .hero-name-character {
@@ -90,7 +100,7 @@ section {
     flex-direction: column;
   }
 
-  .blank {
+  .wrapper > .blank {
     flex-grow: 0.5;
   }
 

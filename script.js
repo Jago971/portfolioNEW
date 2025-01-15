@@ -36,6 +36,13 @@ function fadeDownTextEffect(parent, sentence) {
   });
 }
 
+function exapndHeroSection() {
+  const contents = sections[1].querySelectorAll(".hero-text, .icons")
+  contents.forEach(element => {
+    element.style.flex = "auto 0 0"
+  });
+}
+
 const sections = document.querySelectorAll("section")
 const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
 const heroInputs = [
@@ -44,4 +51,5 @@ const heroInputs = [
 ];
 
 fadeDownTextEffect(sections[1].querySelector("h1"), heroInputs[0])
+setTimeout(() => {exapndHeroSection()},2000)
 setTimeout(() => {expandSections()},5000)
