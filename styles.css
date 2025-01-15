@@ -2,72 +2,102 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: solid 1px red
 }
 
 body {
   height: 100vh;
   width: 100vw;
-}
-
-.wrapper {
-  margin: 0 auto;
-  padding: 4vw;
-  height: 100%;
-  width: 40%;
-  display: grid;
-  grid-template-columns: 1fr 0fr 0fr;
-  grid-template-rows: 1fr 0fr 0fr;
-  transition: grid-template-columns 1s ease-in-out, grid-template-rows 1s ease-in-out, width 1s ease-in-out;
+  padding: 2rem;
+  font-family: changa;
+  text-align: center;
 }
 
 h1 {
-  font-size: clamp(2rem, 3vw, 4rem);
+  font-size: 3rem;
+  font-weight: 100;
 }
 
 h2 {
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.wrapper {
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
 }
 
 section {
-  background-color: lightgray;
-  overflow: hidden;
-  border: solid 1px red;
   display: flex;
   flex-direction: column;
 }
 
-section:not(.hero-section) {
-  display: none
+.blank {
+  flex-grow: 0.3;
+  transition: flex-grow 1s ease-in-out;
+  background-color: blue;
 }
 
-section:not(.cabinet-section) > div {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border: solid 1px blue;
-  gap: clamp(1rem, 1.5vw, 2rem)
+.hero-section {
+  flex: 0.4 1 0;
 }
 
-.hero-section h1 {
-  margin-top: auto
+.cabinet-section {
+  flex: 0.2 1 0;
+}
+
+.call-section {
+  flex: 0.4 1 0;
+}
+
+.hero-section > *, .call-section > * {
+}
+
+.hero-section > h1, .call-section > h1 {
+  height: 50%;
+  align-content: end;
 }
 
 .icons {
-  height: clamp(2rem, 3vw, 4rem);
+  height: 3rem;
+  width: 100%;
   background-color: gray;
-  width: 100%
+}
+
+.cabinet-section, .call-section {
+  display: none;
 }
 
 @media screen and (max-width: 768px) {
-  .wrapper {
-    width: 100%;
+  body {
+    padding: 2rem 1rem;
   }
 
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .blank {
+    flex-grow: 0.5;
+  }
+
+  .hero-section {
+    flex: 0;
+    height: fit-content;
+  }
   
+  .cabinet-section {
+    flex: 0.6 1 0;
+  }
   
-  .call-section > div:nth-of-type(1) {
-    display: none;
+  .call-section {
+    flex: 0.2 1 0;
+  }
+
+  .hero-section > h1, .call-section > h1 {
+    height: initial
   }
 }
