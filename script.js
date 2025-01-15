@@ -37,6 +37,11 @@ function fadeDownTextEffect(parent, sentence) {
 }
 
 const sections = document.querySelectorAll("section")
+const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
+const heroInputs = [
+  "Hey, I'm Matt.",
+  "I'm developing my expertise in full-stack development.",
+];
 
-fadeDownTextEffect()
+fadeDownTextEffect(sections[1].querySelector("h1"), heroInputs[0])
 setTimeout(() => {expandSections()},5000)
