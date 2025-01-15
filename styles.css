@@ -64,7 +64,7 @@ section {
 .hero-name-character {
   display: inline-block;
   opacity: 0;
-  transform: translateY(calc(var(--font-size-3) * -1));
+  transform: translateY(-3rem);
   animation: fadeDownAnim 0.5s ease-in-out forwards
 }
 .special-character {
@@ -109,5 +109,24 @@ section {
 
   .hero-section > h1, .call-section > h1 {
     height: initial
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeDownAnim {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
