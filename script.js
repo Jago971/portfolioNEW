@@ -1,3 +1,8 @@
+function setSpacers() {
+  const heroSpacerHeight = spacerHeightAdjust(heroSpacer, [heroH1, heroH2, heroIcons]);
+  callSpacer.style.height = `${heroSpacerHeight + heroH1.getBoundingClientRect().height}px`
+}
+
 function spacerHeightAdjust(spacer, elementsArray) {
   let sumHeight = 0;
 
@@ -32,9 +37,11 @@ const callH2s = document.querySelectorAll(".call h2");
 const callIcons = document.querySelector(".call .icons");
 const callSpacer = document.querySelector(".call .spacer");
 
+setSpacers()
 
-const heroSpacerHeight = spacerHeightAdjust(heroSpacer, [heroH1, heroH2, heroIcons]);
-callSpacer.style.height = `${heroSpacerHeight + heroH1.getBoundingClientRect().height}px`
+window.addEventListener("resize", () => {
+  setSpacers()
+})
 
 setTimeout(() => {
   expandSections()
