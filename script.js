@@ -1,6 +1,12 @@
 //layout
 function expandSections() {
-  sections[0].style.flex = "0 0 0"
+  sections[0].style.flex = "0 0 0";
+  setTimeout(() => {
+    [2,3].forEach(index => {
+      sections[index].style.display = "flex";
+      sections[index].style.opacity = "1"
+    })
+  }, 1000)
 }
 
 //text effects
