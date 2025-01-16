@@ -62,6 +62,14 @@ function expandHeroSection() {
   });
 }
 
+//icons
+function fadeIconsIn() {
+  icons.forEach((icon, index) => {
+    icon.style.animation = "fadeDownAnim 0.5s ease-in-out forwards"
+    icon.style.animationDelay = `${index * 0.1}s`;
+  });
+}
+
 const sections = document.querySelectorAll("section")
 const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
 const heroName = document.querySelector(".hero-name")
@@ -71,6 +79,7 @@ const heroInputs = [
   "I'm developing my expertise in full-stack development.",
 ];
 const caret = document.querySelector(".caret");
+const icons = document.querySelectorAll(".icons img");
 
 fadeDownTextEffect(heroName, heroInputs[0])
 
@@ -90,4 +99,8 @@ setTimeout(() => {
   typeWriterTextEffect(heroText.querySelector("h2"), heroInputs[1]);
 }, 3000);
 
-setTimeout(() => {expandSections()},6750)
+setTimeout(() => {
+  fadeIconsIn()
+}, 6750)
+
+setTimeout(() => {expandSections()}, 8000)
