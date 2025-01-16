@@ -22,8 +22,7 @@ const callH2s = document.querySelectorAll(".call h2");
 const callIcons = document.querySelector(".call .icons");
 const callSpacer = document.querySelector(".call .spacer");
 
-setTimeout(() => {
-  const heroSpacerHeight = spacerHeightAdjust(heroSpacer, [heroH1, heroH2, heroIcons]);
-  console.log(heroSpacerHeight)
-  callSpacer.style.height = `${heroSpacerHeight + heroH1.getBoundingClientRect().height}px`
-}, 1000);
+
+const heroSpacerHeight = spacerHeightAdjust(heroSpacer, [heroH1, heroH2, heroIcons]);
+console.log(heroSpacerHeight)
+callSpacer.style.height = `${heroSpacerHeight + heroH1.getBoundingClientRect().height}px`
