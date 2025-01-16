@@ -1,55 +1,29 @@
-//layout
-function expandSections() {
-  sections[0].style.flex = "0 0 0"
-}
+function spacerHeightAdjust(spacer, elementsArray) {
+  let sumHeight = 0;
 
-//text effects
-function fadeDownTextEffect(parent, sentence) {
-  let sentenceCharIndex = 0;
-  sentence.split(" ").forEach((word, wordIndex) => {
-    const wordDiv = document.createElement("div");
-    wordDiv.style.display = "inline-block";
-    wordDiv.style.whiteSpace = "nowrap";
-
-    word.split("").forEach((character) => {
-      const charSpan = document.createElement("span");
-
-      if (specialCharRegex.test(character)) {
-        charSpan.classList.add("special-character");
-      }
-
-      charSpan.textContent = character;
-      charSpan.style.animationDelay = `${sentenceCharIndex * 0.04}s`;
-      charSpan.classList.add("hero-name-character");
-      wordDiv.appendChild(charSpan);
-      sentenceCharIndex++;
-    });
-
-    parent.appendChild(wordDiv);
-
-    if (wordIndex < sentence.split(" ").length - 1) {
-      const space = document.createElement("span");
-      space.textContent = "\u00A0";
-      parent.appendChild(space);
-      sentenceCharIndex++;
-    }
+  elementsArray.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    sumHeight += rect.height;
   });
+
+  spacer.style.height = `${
+    (wrapper.getBoundingClientRect().height - sumHeight) / 2}px`;
+  return (wrapper.getBoundingClientRect().height - sumHeight) / 2
 }
 
-function exapndHeroSection() {
-  const grids = sections[1].querySelectorAll(".grid-container")
-  grids.forEach(grid => {
-    grid.style.gridTemplateRows = "1fr"
-  });
-}
+const wrapper = document.querySelector(".wrapper");
 
-const sections = document.querySelectorAll("section")
-const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
-const heroInputs = [
-  "Hey, I'm Matt.",
-  "I'm developing my expertise in full-stack development.",
-];
+const heroH1 = document.querySelector(".hero h1");
+const heroH2 = document.querySelector(".hero h2");
+const heroIcons = document.querySelector(".hero .icons");
+const heroSpacer = document.querySelector(".hero .spacer");
 
-fadeDownTextEffect(sections[1].querySelector("h1"), heroInputs[0])
-setTimeout(() => {exapndHeroSection()},2000)
-setTimeout(() => {expandSections()},5000)
+const callH2s = document.querySelectorAll(".call h2");
+const callIcons = document.querySelector(".call .icons");
+const callSpacer = document.querySelector(".call .spacer");
+
+setTimeout(() => {
+  const heroSpacerHeight = spacerHeightAdjust(heroSpacer, [heroH1, heroH2, heroIcons]);
+  console.log(heroSpacerHeight)
+  callSpacer.style.height = `${heroSpacerHeight + heroH1.getBoundingClientRect().height}px`
+}, 1000);

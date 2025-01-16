@@ -2,143 +2,89 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-weight: 100;
+}
+
+.tst {
   border: solid 1px red
+}
+
+h1 {
+  font-size: 4cqw;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 2cqw;
+  line-height: 1;
 }
 
 body {
   height: 100vh;
   width: 100vw;
   padding: 2rem;
-  font-family: changa;
-  text-align: center;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 100;
-}
-
-h2 {
-  font-size: 1.5rem;
-  font-weight: 100;
 }
 
 .wrapper {
   height: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
-}
-
-.wrapper > .blank {
-  flex-grow: 0.3;
+  justify-content: space-around;
 }
 
 section {
+  container: size;
+
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  max-width: 480px;
 }
 
-.blank {
-  transition: flex-grow 1s ease-in-out;
+.spacer {
+  width: 100%;
   background-color: blue;
 }
 
-.hero-section {
-  flex: 0.4 1 0;
-}
-
-.cabinet-section {
-  flex: 0.2 1 0;
-}
-
-.call-section {
-  flex: 0.4 1 0;
-}
-
-.hero-name {
-  align-content: end;
-}
-
-.hero-section > .blank {
-  flex-grow: 0.5;
-  transition: flex-grow 1s ease-in-out;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s ease-in-out
-}
-
-.grid-container > * {
-  overflow: hidden;
-}
-
-img {
-  height: 3rem
-}
-
-.hero-name-character {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(-3rem);
-  animation: fadeDownAnim 0.5s ease-in-out forwards
-}
-.special-character {
-  color: lightseagreen;
-}
-
-.cabinet-section, .call-section {
-  display: none;
+.icons {
+  height: 4cqw;
+  width: 100%;
+  background-color: gray;
 }
 
 @media screen and (max-width: 768px) {
+  h1 {
+    font-size: 6cqh;
+  }
+  
+  h2 {
+    font-size: 3cqh
+  }
+
   body {
-    padding: 2rem 1rem;
+    padding: 1rem;
   }
 
   .wrapper {
     flex-direction: column;
   }
 
-  .wrapper > .blank {
-    flex-grow: 0.5;
+  section {
+    max-width: 100%;
   }
 
-  .hero-section {
-    flex: 0;
-    height: fit-content;
+  .hero {
+    flex: 0.2 1 0;
   }
   
-  .cabinet-section {
+  .cabinet {
     flex: 0.6 1 0;
   }
   
-  .call-section {
+  .call {
     flex: 0.2 1 0;
-  }
-
-  .hero-section > h1, .call-section > h1 {
-    height: initial
-  }
-}
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeDownAnim {
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
