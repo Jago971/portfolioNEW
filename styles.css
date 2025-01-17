@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   font-weight: 100;
-  /* border: solid 1px red */
 }
 
 .tst {
@@ -12,15 +11,15 @@
 
 h1, h2 {
   width: 100%;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 h1 {
-  font-size: 4cqw;
+  font-size: 16cqw;
 }
 
 h2 {
-  font-size: 2cqw;
+  font-size: 8cqw;
 }
 
 body {
@@ -42,7 +41,7 @@ body {
 }
 
 section {
-  container: size;
+  container-type: inline-size;
 
   width: 33.33%; 
   max-width: 480px;
@@ -54,9 +53,9 @@ section {
   text-align: center;
 
   transition: opacity 1s ease;
-
-  > * {
-    padding: 1cqw 0;
+  
+  > div:not(.spacer) {
+    padding: 4cqw 0
   }
 }
 
@@ -70,27 +69,32 @@ section {
   justify-content:center;
   align-items: center;
   flex-wrap: wrap;
+  gap: 4cqw 8cqw;
   img {
-    height: 2.25cqw;
-    margin: 0 0.5cqw
+    height: 12cqw;
   }
   .node {
-    height: 2.75cqw
+    height: 14cqw
   }
   .express {
-    height: 1.75cqw
+    height: 8cqw
+  }
+  .maria {
+    height: 14cqw
   }
 }
 
 .hero {
   .hero-text-div {
-    position: relative;
+  position: relative;
+  
     h2:nth-of-type(1) {
-      /* color: transparent; */
+      color: transparent;
     }
+
     h2:nth-of-type(2) {
       position: absolute;
-      top: 0
+      top: 4cqw
     }
   }
   .hero-name-character {
@@ -135,6 +139,10 @@ section {
   section {
     width: 100%;
     flex-shrink: 1;
+
+    > div:not(.spacer) {
+      padding: 0
+    }
   }
 
   .spacer:not(.wrapper > .spacer) {
@@ -152,6 +160,10 @@ section {
     .express {
       height: 5cqw
     }
+  }
+
+  .hero .hero-text-div h2:nth-of-type(2) {
+      top: 0;
   }
   
   .cabinet {
