@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   font-weight: 100;
+  border: solid 1px red
 }
 
 .tst {
@@ -32,7 +33,10 @@ body {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
+  > .spacer {
+    flex-grow: 0.5;
+    transition: flex-grow 1s ease-in-out;
+  }
 }
 
 section {
@@ -45,8 +49,6 @@ section {
   flex-direction: column;
   align-items: center;
   text-align: center;
-
-  transition: width 1s ease-in-out, opacity 1s ease;
 }
 
 .collapsed {
@@ -54,7 +56,6 @@ section {
 }
 
 .spacer {
-  width: 100%;
   background-color: blue;
 }
 
@@ -95,14 +96,17 @@ section {
 
   .wrapper {
     flex-direction: column;
+    justify-content: start;
   }
 
   section {
     width: 100%;
+    flex-shrink: 1;
+    transition: opacity 1s ease;
   }
 
-  .collapsed {
-    height: 0
+  .spacer:not(.wrapper > .spacer) {
+    display: none;
   }
 
   .icons {
@@ -116,16 +120,13 @@ section {
       height: 5cqw
     }
   }
-
-  .hero {
-    flex: 0.2 1 0;
-  }
   
   .cabinet {
-    flex: 0.6 1 0;
+    flex-grow: 1;
   }
-  
-  .call {
-    flex: 0.2 1 0;
+
+  .collapsed {
+    flex-grow: 0;
+    height: 0
   }
 }

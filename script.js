@@ -7,8 +7,7 @@ function spacerHeightAdjust(spacer, elementsArray) {
   let sumHeight = 0;
 
   elementsArray.forEach((element) => {
-    const rect = element.getBoundingClientRect();
-    sumHeight += rect.height;
+    sumHeight += element.getBoundingClientRect().height;
   });
 
   spacer.style.height = `${
@@ -17,15 +16,17 @@ function spacerHeightAdjust(spacer, elementsArray) {
 }
 
 function expandSections() {
+  wrapperSpacer.style.flexGrow = "0"
   sections.forEach(section => {
-    section.classList.remove("collapsed")
     setTimeout(() => {
+      section.classList.remove("collapsed")
       section.style.opacity = "1"
     }, 1250);
   });
 }
 
 const wrapper = document.querySelector(".wrapper");
+const wrapperSpacer = document.querySelector(".wrapper > .spacer")
 const sections = document.querySelectorAll("section")
 
 const heroH1 = document.querySelector(".hero h1");
