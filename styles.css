@@ -32,6 +32,8 @@ body {
 .wrapper {
   height: 100%;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   > .spacer {
     flex-grow: 0.5;
@@ -48,7 +50,14 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   text-align: center;
+
+  transition: opacity 1s ease;
+
+  > * {
+    padding: 1cqw 0;
+  }
 }
 
 .collapsed {
@@ -62,12 +71,12 @@ section {
 .icons {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content:center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 1cqw;
   img {
-    height: 2.25cqw
+    height: 2.25cqw;
+    margin: 0 0.5cqw
   }
   .node {
     height: 2.75cqw
@@ -102,7 +111,6 @@ section {
   section {
     width: 100%;
     flex-shrink: 1;
-    transition: opacity 1s ease;
   }
 
   .spacer:not(.wrapper > .spacer) {
@@ -111,6 +119,7 @@ section {
 
   .icons {
     img {
+      margin: 1cqw;
       height: 7cqw;
     }
     .node {
