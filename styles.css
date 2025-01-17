@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   font-weight: 100;
-  border: solid 1px red
+  /* border: solid 1px red */
 }
 
 .tst {
@@ -50,7 +50,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   text-align: center;
 
   transition: opacity 1s ease;
@@ -62,10 +62,6 @@ section {
 
 .collapsed {
   width: 0
-}
-
-.spacer {
-  background-color: blue;
 }
 
 .icons {
