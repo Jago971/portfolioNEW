@@ -2,20 +2,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-weight: 100;
+  /* border: solid 1px red */
 }
 
-.tst {
-  border: solid 1px red
-}
-
-h1, h2 {
+h1,
+h2 {
   width: 100%;
   line-height: 1.2;
+  font-weight: 100;
+  color: white;
+  font-family: Montserrat;
 }
 
 h1 {
-  font-size: 16cqw;
+  font-size: 14cqw;
 }
 
 h2 {
@@ -26,6 +26,7 @@ body {
   height: 100vh;
   width: 100vw;
   padding: 2rem;
+  background-color: rgb(25, 30, 50);
 }
 
 .wrapper {
@@ -43,7 +44,7 @@ body {
 section {
   container-type: inline-size;
 
-  width: 33.33%; 
+  width: 33.33%;
   max-width: 480px;
 
   display: flex;
@@ -53,58 +54,112 @@ section {
   text-align: center;
 
   transition: opacity 1s ease;
-  
+
   > div:not(.spacer) {
-    padding: 4cqw 0
+    padding: 4cqw 0;
   }
 }
 
 .collapsed {
-  width: 0
+  width: 0;
 }
 
 .icons {
   width: 100%;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 4cqw 8cqw;
   img {
+    filter: brightness(0) invert(1);
+  }
+  img, svg {
     height: 12cqw;
   }
   .node {
-    height: 14cqw
+    height: 14cqw;
   }
   .express {
-    height: 8cqw
+    height: 8cqw;
   }
   .maria {
-    height: 14cqw
+    height: 14cqw;
   }
 }
 
 .hero {
+  .divider {
+    position: relative;
+    padding: 0;
+    background: linear-gradient(
+      to right,
+      white 0 calc(100% - 45cqw),
+      lightseagreen calc(100% - 15cqw) calc(100% - 2cqw),
+      white
+    );
+    height: 0.5cqw;
+    width: 0%;
+    align-self: flex-start;
+    transition: width 2.5s ease-in-out;
+    > div {
+      height: 100%;
+      width: 100%;
+      background-color: white;
+      opacity: 0;
+      transition: opacity 0.5s linear;
+    }
+  }
+
+  .divider::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5cqw;
+    box-shadow: 0 0 var(--after-shadow-size, 0) var(--after-shadow-spread, 0)
+      lightseagreen; /* Use CSS variables */
+    z-index: -2;
+    transition: box-shadow 0.5s ease-in-out;
+  }
+
+  .divider::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1cqw;
+    box-shadow: 0 0 var(--before-shadow-size, 0) var(--before-shadow-spread, 0)
+      rgb(223, 255, 253); /* Use CSS variables */
+    z-index: -1;
+    transition: box-shadow 1s ease-in-out;
+  }
+
   .hero-text-div {
-  position: relative;
-  
+    position: relative;
+
     h2:nth-of-type(1) {
       color: transparent;
     }
 
     h2:nth-of-type(2) {
       position: absolute;
-      top: 4cqw
+      top: 4cqw;
     }
   }
   .hero-name-character {
     display: inline-block;
     opacity: 0;
     transform: translateY(-3rem);
-    animation: fadeDownAnim 0.5s ease-in-out forwards
+    animation: fadeDownAnim 0.5s ease-in-out forwards;
   }
   .special-character {
+    font-weight: 300;
     color: lightseagreen;
+    text-shadow: 0 0 3cqw white, 0 0 4cqw rgb(100, 255, 255),
+      0 0 5cqw rgb(100, 255, 255), 0 0 6cqw rgb(100, 255, 255);
   }
   .caret {
     display: none;
@@ -114,7 +169,8 @@ section {
   }
 }
 
-.cabinet, .call {
+.cabinet,
+.call {
   opacity: 0;
 }
 
@@ -122,9 +178,9 @@ section {
   h1 {
     font-size: 6cqh;
   }
-  
+
   h2 {
-    font-size: 3cqh
+    font-size: 3cqh;
   }
 
   body {
@@ -141,7 +197,7 @@ section {
     flex-shrink: 1;
 
     > div:not(.spacer) {
-      padding: 0
+      padding: 0;
     }
   }
 
@@ -150,29 +206,33 @@ section {
   }
 
   .icons {
-    img {
+    img, svg {
       margin: 1cqw;
       height: 7cqw;
     }
     .node {
-      height: 9cqw
+      height: 9cqw;
     }
     .express {
-      height: 5cqw
+      height: 5cqw;
     }
   }
 
-  .hero .hero-text-div h2:nth-of-type(2) {
-      top: 0;
+  .divider {
+    margin: 5cqw 0
   }
-  
+
+  .hero .hero-text-div h2:nth-of-type(2) {
+    top: 0;
+  }
+
   .cabinet {
     flex-grow: 1;
   }
 
   .collapsed {
     flex-grow: 0;
-    height: 0
+    height: 0;
   }
 }
 
@@ -192,5 +252,11 @@ section {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  to {
+    text-shadow: 0 0 0 transparent;
   }
 }

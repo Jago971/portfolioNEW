@@ -30,6 +30,38 @@ function expandSections() {
   }, 1250);
 }
 
+function expandDivider(element) {
+  window.innerWidth > 768
+  ? element.style.width = "300%"
+  : element.style.width = "100%";
+
+  const shadows = {
+    "--after-shadow-size": ["0", "6cqw"],
+    "--after-shadow-spread": ["0", "2cqw"],
+    "--before-shadow-size": ["0", "2cqw"],
+    "--before-shadow-spread": ["0", "1cqw"]
+  };
+
+  for (const property in shadows) {
+    element.style.setProperty(property, shadows[property][0]);
+  }
+
+  setTimeout(() => {
+    for (const property in shadows) {
+      element.style.setProperty(property, shadows[property][1]);
+    }
+  },100)
+
+  setTimeout(() => {
+    for (const property in shadows) {
+      element.style.setProperty(property, shadows[property][0]);
+    }
+  }, 2000);
+
+  setTimeout(() => {
+    element.querySelector("div").style.opacity = "1"
+  },2250)
+}
 
 // ---------- text effects ---------- //
 function fadeDownTextEffect(parent, sentence) {
@@ -42,14 +74,12 @@ function fadeDownTextEffect(parent, sentence) {
 
     word.split("").forEach((character) => {
       const charSpan = document.createElement("span");
-
-      if (specialCharRegex.test(character)) {
-        charSpan.classList.add("special-character");
-      }
-
       charSpan.textContent = character;
       charSpan.style.animationDelay = `${sentenceCharIndex * 0.04}s`;
       charSpan.classList.add("hero-name-character");
+      if (specialCharRegex.test(character)) {
+        charSpan.classList.add("special-character");
+      }
       wordDiv.appendChild(charSpan);
       sentenceCharIndex++;
     });
@@ -91,6 +121,7 @@ const sections = document.querySelectorAll("section");
 const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
 
 const heroNameDiv = document.querySelector(".hero-name-div");
+const heroDivider = document.querySelector(".divider")
 const heroTextDivs = document.querySelectorAll(".hero-text-div");
 const carets = document.querySelectorAll(".caret")
 const heroIcons = document.querySelector(".hero .icons");
@@ -125,4 +156,5 @@ setTimeout(() => {
 
 setTimeout(() => {
   expandSections();
-}, 6500);
+  expandDivider(heroDivider)
+}, 1000);
