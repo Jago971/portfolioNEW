@@ -99,10 +99,10 @@ function animateHoles(fold) {
   hole.style.boxShadow = "none";
   hole.style.animation = "hole-brightness 1s forwards";
   setTimeout(() => {
-    hole.style.backgroundColor = "white";
+    hole.style.backgroundColor = "var(--bg)";
     hole.style.transform = "initial";
     hole.style.boxShadow = "inset 0.75cqi 0.75cqi 0.75cqi rgba(0, 0, 0, 0.25)";
-  }, 500);
+  }, 350);
 }
 
 function pointElement(event, range, element) {

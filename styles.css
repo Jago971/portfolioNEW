@@ -7,10 +7,33 @@
 }
 
 :root {
+  --bg: white;
   --paper-bg: rgb(255, 250, 200);
   --paper-margin: rgba(255, 180, 180, 0.6);
   --paper-lines: rgb(218, 215, 228);
 }
+
+body {
+  background-image: url("assets/pattern-light2.svg");
+  background-size: 15%;
+  background-position: center center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: url("assets/pattern-dark2.svg");
+    background-size: 5%;
+    background-position: center center;
+  }
+
+  :root {
+    --bg: black;
+    --paper-bg: rgb(252, 252, 248);
+    --paper-margin: rgba(182, 95, 95, 0.8);
+    --paper-lines: rgb(156, 152, 167);
+  }
+}
+
 
 a {
   color: inherit;
@@ -27,9 +50,9 @@ a:active {
   color: inherit;
 }
 
-
-h1, p {
-    user-select: none;
+h1,
+p {
+  user-select: none;
 }
 
 h1 {
@@ -72,9 +95,9 @@ p {
     background: linear-gradient(
       to bottom,
       transparent 5%,
-      rgb(255, 105, 180, 0.5) 15%, /* bright pink with transparency */
-      rgb(255, 105, 180) 85%, /* bright pink */
-      transparent 95%
+      rgb(255, 105, 180, 0.5) 15%,
+      /* bright pink with transparency */ rgb(255, 105, 180) 85%,
+      /* bright pink */ transparent 95%
     );
   }
   .javascript {
@@ -225,7 +248,7 @@ p {
     position: absolute;
     top: 0;
     left: 0;
-    color: rgb(255, 250, 200);
+    color: var(--paper-bg);
     height: 100%;
     overflow: hidden;
     transition: width 0.5s ease;
@@ -240,7 +263,7 @@ p {
 .codepen:hover,
 .linkedin:hover,
 .github:hover {
-    cursor: pointer;
+  cursor: pointer;
   transform: scale(1.25) !important;
   z-index: 2;
 }
@@ -248,7 +271,7 @@ p {
 .codepen,
 .linkedin,
 .github {
-    text-decoration: underline dashed;
+  text-decoration: underline dashed;
 }
 
 p:first-of-type {
@@ -275,6 +298,7 @@ section {
 section:nth-of-type(1) {
   z-index: 2;
 }
+
 section:nth-of-type(2) {
   z-index: 1;
 }
@@ -378,7 +402,7 @@ img {
 .margin-left {
   grid-row: span 2;
   grid-column: 1;
-  border-right: solid 2px var(--paper-margin);
+  border-right: solid 0.5cqw var(--paper-margin);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -399,7 +423,7 @@ img {
 .margin-top::after {
   content: "";
   position: absolute;
-  width: calc(9.5% - 2px);
+  width: calc(9.5% - 0.5cqw);
   height: 100%;
   background: linear-gradient(
     to bottom,
@@ -407,15 +431,14 @@ img {
     var(--paper-bg) 90%,
     transparent 91%
   );
-  border-right: solid 2px var(--paper-margin);
+  border-right: solid 0.5cqw var(--paper-margin);
 }
 
 .hole {
   width: 4cqw;
   margin: 4.15cqh 0;
-  border: solid 1px rgb(220, 215, 175);
   border-radius: 50%;
-  box-shadow: inset 0.5cqw 0.5cqw 0.5cqw rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0.5cqw 0.5cqw 0.5cqw rgba(0, 0, 0, 0.5);
   aspect-ratio: 1;
   transition: box-shadow 0.25s linear;
 }
@@ -423,7 +446,7 @@ img {
 .paper .fold:nth-of-type(1) .margin-left {
   justify-content: start;
   .hole {
-    background-color: rgb(255, 250, 200);
+    background-color: var(--paper-bg);
     transform: scaleY(-1);
   }
 }
@@ -431,7 +454,7 @@ img {
 .paper .fold:nth-of-type(2) .margin-left {
   justify-content: space-between;
   .hole {
-    background-color: white;
+    background-color: var(--bg);
   }
 }
 
@@ -439,7 +462,7 @@ img {
   justify-content: end;
   padding-bottom: 25cqh;
   .hole {
-    background-color: rgb(255, 250, 200);
+    background-color: var(--paper-bg);
     transform: scaleY(-1);
   }
 }
