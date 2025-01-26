@@ -121,10 +121,8 @@ function drawHighlights(paper, includesBlacks = false) {
   highlights.forEach((element, index) => {
     if(window.innerWidth > 768 && element.classList.contains("below")) {
       increment = 1
-      console.log("increament changed to", increment)
       return;
     }
-    console.log(increment)
     element.style.backgroundRepeat = "no-repeat"
     element.style.backgroundSize = "0% 100%"
     element.style.animation = "fillGradient 0.5s ease forwards";

@@ -12,6 +12,22 @@
   --paper-lines: rgb(218, 215, 228);
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:active {
+  color: inherit;
+}
+
+
 h1, p {
     user-select: none;
 }
