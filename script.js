@@ -139,10 +139,10 @@ function drawHighlights(paper, includesBlacks = false) {
 function unfoldPaper(paper, section) {
   moveFold(
     paper.querySelectorAll(".fold")[0],
-    0.93,
+    0.90,
     -10,
     paper.querySelectorAll(".fold")[2],
-    0.96
+    0.95
   );
 
   setTimeout(() => {
@@ -151,7 +151,7 @@ function unfoldPaper(paper, section) {
       1,
       10,
       paper.querySelectorAll(".fold")[1],
-      0.96,
+      0.95,
       true
     );
   }, 1000);
