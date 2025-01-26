@@ -80,6 +80,7 @@ function moveFold(
   brightness2,
   lastFold = false
 ) {
+  const clickMe = fold1.querySelector(".click-me")
   const content1 = fold1.querySelector(".content");
   const content2 = fold2.querySelector(".content");
   if (lastFold) {
@@ -89,6 +90,7 @@ function moveFold(
   fold1.style.filter = `brightness(${brightness1})`;
   fold2.style.filter = `brightness(${brightness2})`;
   setTimeout(() => {
+    if(clickMe) {clickMe.style.opacity = "0"}
     content1.style.opacity = "1";
   }, 300);
   animateHoles(fold1);
