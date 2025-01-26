@@ -1,160 +1,311 @@
-// ---------- layout effects---------- //
-function setSpacers() {
-  const heroSpacerHeight = spacerHeightAdjust(heroSpacer, [
-    heroNameDiv,
-    heroTextDivs[0],
-    heroTextDivs[1],
-    heroIcons,
-  ]);
-  callSpacer.style.height = `${
-    heroSpacerHeight + heroNameDiv.offsetHeight
-  }px`;
-}
+// ---------- layout ---------- //
 
-function spacerHeightAdjust(spacer, elementsArray) {
-  const sumHeight = elementsArray.reduce((total, element) => total + element.offsetHeight, 0);
-  const spacerHeight = (wrapper.offsetHeight - sumHeight) / 2;
-
-  spacer.style.height = `${spacerHeight}px`;
-  return spacerHeight;
-}
-
-function expandSections() {
-  wrapperSpacer.style.flexGrow = "0";
-
-  setTimeout(() => {
+function deviceLayout(width) {
+  const below = document.querySelector(".below")
+  if (width > 768) {
     sections.forEach((section) => {
-      section.classList.remove("collapsed");
-      section.style.opacity = "1";
+      section.classList.remove("mobile");
+      section.classList.add("desktop");
+      below.style.display = "none"
     });
-  }, 1250);
-}
-
-function expandDivider(element) {
-  window.innerWidth > 768
-  ? element.style.width = "300%"
-  : element.style.width = "100%";
-
-  const shadows = {
-    "--after-shadow-size": ["0", "6cqw"],
-    "--after-shadow-spread": ["0", "2cqw"],
-    "--before-shadow-size": ["0", "2cqw"],
-    "--before-shadow-spread": ["0", "1cqw"]
-  };
-
-  for (const property in shadows) {
-    element.style.setProperty(property, shadows[property][0]);
+  } else {
+    sections.forEach((section) => {
+      section.classList.remove("desktop");
+      section.classList.add("mobile");
+      below.style.display = "initial"
+    });
   }
-
-  setTimeout(() => {
-    for (const property in shadows) {
-      element.style.setProperty(property, shadows[property][1]);
-    }
-  },100)
-
-  setTimeout(() => {
-    for (const property in shadows) {
-      element.style.setProperty(property, shadows[property][0]);
-    }
-  }, 2000);
-
-  setTimeout(() => {
-    element.querySelector("div").style.opacity = "1"
-  },2250)
 }
 
-// ---------- text effects ---------- //
-function fadeDownTextEffect(parent, sentence) {
-  let sentenceCharIndex = 0;
+function moveSection(section) {
+  const stylesheet = document.styleSheets[0];
+  const margins = [0, 66.66];
 
-  sentence.split(" ").forEach((word, wordIndex) => {
-    const wordDiv = document.createElement("div");
-    wordDiv.style.display = "inline-block";
-    wordDiv.style.whiteSpace = "nowrap";
+  for (let index = 0; index < sections.length; index++) {
+    const className = `.desktop:nth-of-type(${section + 1})`;
+    const newStyle = `margin-left: ${margins[section]}%;`;
 
-    word.split("").forEach((character) => {
-      const charSpan = document.createElement("span");
-      charSpan.textContent = character;
-      charSpan.style.animationDelay = `${sentenceCharIndex * 0.04}s`;
-      charSpan.classList.add("hero-name-character");
-      if (specialCharRegex.test(character)) {
-        charSpan.classList.add("special-character");
-      }
-      wordDiv.appendChild(charSpan);
-      sentenceCharIndex++;
-    });
+    sections[section].classList.toggle("section-transition");
+    stylesheet.insertRule(`${className} { ${newStyle} }`);
+    setTimeout(() => {
+      sections[section].classList.toggle("section-transition");
+    }, 1000);
+  }
+}
 
-    parent.appendChild(wordDiv);
+function scrollToNext(container) {
+  const scrollTop = container.scrollTop;
+  const containerHeight = container.clientHeight;
+  const scrollHeight = container.scrollHeight;
+  const nextPosition = Math.min(scrollTop + containerHeight, scrollHeight);
 
-    if (wordIndex < sentence.split(" ").length - 1) {
-      const space = document.createElement("span");
-      space.textContent = "\u00A0";
-      parent.appendChild(space);
-      sentenceCharIndex++;
+  container.scrollTo({
+    top: nextPosition,
+    behavior: "smooth",
+  });
+}
+
+// ---------- visuals ---------- //
+
+function drawLines() {
+  const root = document.documentElement;
+  const lineColor = getComputedStyle(root)
+    .getPropertyValue("--paper-lines")
+    .trim();
+  const paperColor = getComputedStyle(root)
+    .getPropertyValue("--paper-bg")
+    .trim();
+  const folds = document.querySelectorAll(".fold");
+  const lineHeight = folds[0].offsetHeight / 12;
+
+  folds.forEach((fold) => {
+    fold.style.background = `
+    linear-gradient(
+      to bottom,
+      ${paperColor},
+      ${paperColor} ${lineHeight * 0.93}px,
+      ${lineColor} ${lineHeight * 0.93}px,
+      ${lineColor} ${lineHeight}px)`;
+    fold.style.backgroundSize = `100% ${lineHeight}px`;
+  });
+}
+
+// ---------- animation ---------- //
+
+function moveFold(
+  fold1,
+  brightness1,
+  angle1,
+  fold2,
+  brightness2,
+  lastFold = false
+) {
+  const content1 = fold1.querySelector(".content");
+  const content2 = fold2.querySelector(".content");
+  if (lastFold) {
+    content2.style.opacity = "1";
+  }
+  fold1.style.transform = `rotateX(${angle1}deg)`;
+  fold1.style.filter = `brightness(${brightness1})`;
+  fold2.style.filter = `brightness(${brightness2})`;
+  setTimeout(() => {
+    content1.style.opacity = "1";
+  }, 300);
+  animateHoles(fold1);
+}
+
+function animateHoles(fold) {
+  const hole = fold.querySelector(".hole");
+  hole.style.boxShadow = "none";
+  hole.style.animation = "hole-brightness 1s forwards";
+  setTimeout(() => {
+    hole.style.backgroundColor = "white";
+    hole.style.transform = "initial";
+    hole.style.boxShadow = "inset 0.75cqi 0.75cqi 0.75cqi rgba(0, 0, 0, 0.25)";
+  }, 500);
+}
+
+function pointElement(event, range, element) {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const percentX = (event.clientX / viewportWidth).toFixed(2);
+  const percentY = (event.clientY / viewportHeight).toFixed(2);
+  element.style.transform = `rotateX(${
+    range * (2 * percentY - 1) * -1
+  }deg) rotateY(${range * (2 * percentX - 1)}deg)`;
+}
+
+function drawHighlights(paper, includesBlacks = false) {
+  const highlights = paper.querySelectorAll("p span")
+  let increment = 0
+  highlights.forEach((element, index) => {
+    if(window.innerWidth > 768 && element.classList.contains("below")) {
+      increment = 1
+      console.log("increament changed to", increment)
+      return;
+    }
+    console.log(increment)
+    element.style.backgroundRepeat = "no-repeat"
+    element.style.backgroundSize = "0% 100%"
+    element.style.animation = "fillGradient 0.5s ease forwards";
+    element.classList.remove("no-background")
+    element.style.animationDelay = `${(index - increment) * 0.5}s`
+    if(includesBlacks && (index === 11 || index === 12)) {
+      setTimeout(() => {
+        element.style.setProperty(`--width${index-10}`, "100%");
+      }, (index - increment) * 500);
     }
   });
 }
 
-function typeWriterTextEffect(parent, sentence) {
-  if (sentence.length > 0) {
-    const character =  sentence[0];
-    const caret = parent.querySelector(".caret");
+function unfoldPaper(paper, section) {
+  moveFold(
+    paper.querySelectorAll(".fold")[0],
+    0.93,
+    -10,
+    paper.querySelectorAll(".fold")[2],
+    0.96
+  );
 
-    if (specialCharRegex.test(character)) {
-      const element = document.createElement("span");
-      element.textContent = character;
-      element.classList.add("special-character");
-      parent.insertBefore(element, caret);
-    } else {
-      caret.insertAdjacentText("beforebegin", character);
-    }
+  setTimeout(() => {
+    moveFold(
+      paper.querySelectorAll(".fold")[2],
+      1,
+      10,
+      paper.querySelectorAll(".fold")[1],
+      0.96,
+      true
+    );
+  }, 1000);
 
-    setTimeout(() => {
-      typeWriterTextEffect(parent, sentence.slice(1));
-    }, 60);
-  }
+  setTimeout(() => {
+    drawHighlights(paper, paperCount === 2)
+  }, 2000);
+
+  setTimeout(() => {
+    moveSection(section);
+    // scrollToNext(wrapper);
+  }, section === 0 ? 5500 : 8500);
 }
 
+// ---------- declarations ---------- //
+
 const wrapper = document.querySelector(".wrapper");
-const wrapperSpacer = document.querySelector(".wrapper > .spacer");
 const sections = document.querySelectorAll("section");
-const specialCharRegex = /[!@#$%^&*(),.?":{}|<>'-]/;
+const papers = document.querySelectorAll(".paper");
+let paperCount = 0;
 
-const heroNameDiv = document.querySelector(".hero-name-div");
-const heroDivider = document.querySelector(".divider")
-const heroTextDivs = document.querySelectorAll(".hero-text-div");
-const carets = document.querySelectorAll(".caret")
-const heroIcons = document.querySelector(".hero .icons");
-const heroSpacer = document.querySelector(".hero .spacer");
-const heroInputs = [
-  "Hey, I'm Matt.",
-  "I'm developing my expertise in full-stack development.",
-  "These are some of the technologies I use:"
-];
+// ---------- content object ---------- //
 
-const callH2s = document.querySelectorAll(".call h2");
-const callIcons = document.querySelector(".call .icons");
-const callSpacer = document.querySelector(".call .spacer");
+const content = {
+  about: {
+    "information about me": {
+      profile: {},
+      interests: {},
+      hobbies: {},
+    },
+    education: {
+      coding: {},
+      school: {},
+      extra: {}
+    },
+    cv: {
+      text: {},
+      download: {}
+    },
+    contect: {
+      socialMedia: {},
+      contactForm: {}
+    }
+  },
+  projects: {
+    spotlight: {
+      project1: {
+        title: {},
+        image: {},
+        info: {},
+        link: {}
+      },
+      project2: {
+        title: {},
+        image: {},
+        info: {},
+        link: {}
+      },
+      project3: {
+        title: {},
+        image: {},
+        info: {},
+        link: {}
+      }
+    },
+  },
+  activity: {},
+};
 
-fadeDownTextEffect(heroNameDiv.querySelector("h1"), heroInputs[0])
+// ---------- onload ---------- //
 
-setSpacers();
+deviceLayout(window.innerWidth);
 
-window.addEventListener("resize", () => {
-  setSpacers();
+drawLines();
+
+document.addEventListener("mousemove", function (event) {
+  pointElement(event, 10, papers[0]);
+  pointElement(event, 10, papers[1]);
 });
 
-setTimeout(() => {
-  carets[0].style.display = "inline-block";
-  carets[1].style.display = "inline-block";
-}, 2000);
+window.addEventListener("resize", () => {
+  drawLines();
+  deviceLayout(window.innerWidth);
+});
 
-setTimeout(() => {
-  typeWriterTextEffect(heroTextDivs[0].querySelectorAll("h2")[1], heroInputs[1]);
-  typeWriterTextEffect(heroTextDivs[1].querySelectorAll("h2")[1], heroInputs[2]);
-}, 3000);
+// ---------- execution ---------- //
 
-setTimeout(() => {
-  expandSections();
-  expandDivider(heroDivider)
-}, 1000);
+papers.forEach((paper, index) => {
+  const fold = paper.querySelector(".fold");
+  fold.addEventListener("click", () => {
+    if (paperCount === index) {
+      unfoldPaper(paper, index);
+      fold.classList.toggle("hover");
+      paperCount++;
+    }
+  });
+});
+
+// setTimeout(() => {
+//   moveFold(
+//     papers[1].querySelectorAll(".fold")[0],
+//     0.93,
+//     -15,
+//     papers[1].querySelectorAll(".fold")[2],
+//     0.96
+//   );
+// }, 1000);
+
+// setTimeout(() => {
+//   moveSection(1);
+// }, 3000);
+
+// setTimeout(() => {
+//   moveFold(
+//     papers[0].querySelectorAll(".fold")[0],
+//     0.93,
+//     -15,
+//     papers[0].querySelectorAll(".fold")[2],
+//     0.96
+//   );
+// }, 3750);
+
+// setTimeout(() => {
+//   moveFold(
+//     papers[0].querySelectorAll(".fold")[2],
+//     1,
+//     15,
+//     papers[0].querySelectorAll(".fold")[1],
+//     0.96,
+//     true
+//   );
+// }, 6000);
+
+// // setTimeout(() => {
+// //   drawHighlights(papers[0])
+// // }, 7000);
+
+// setTimeout(() => {
+//   moveSection(0);
+// }, 12500);
+
+// setTimeout(() => {
+//   moveFold(
+//     papers[1].querySelectorAll(".fold")[2],
+//     1,
+//     15,
+//     papers[1].querySelectorAll(".fold")[1],
+//     0.96,
+//     true
+//   );
+// }, 14500);
+
+// // setTimeout(() => {
+// //   drawHighlights(papers[1], true)
+// // }, 15500);
