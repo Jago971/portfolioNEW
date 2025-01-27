@@ -118,10 +118,10 @@ function pointElement(event, range, element) {
   if (event.type === "mousemove") {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
-  } else if (event.type === "devicemotion") {
-    const { rotationRate } = event;
-    percentX = ((rotationRate.gamma + 90) / 180).toFixed(2);
-    percentY = ((rotationRate.beta + 90) / 180).toFixed(2);
+  } else if (event.type === "deviceorientation") {
+    const { alpha, beta, gamma } = event;
+    percentX = ((gamma + 90) / 180).toFixed(2); // Adjust gamma (left-right tilt)
+    percentY = ((beta + 90) / 180).toFixed(2);  // Adjust beta (front-back tilt)
   }
 
   element.style.transform = `rotateX(${
@@ -251,13 +251,19 @@ document.addEventListener("mousemove", function (event) {
   pointElement(event, 10, papers[1]);
 });
 
-if (window.DeviceMotionEvent != undefined) {
-  window.ondevicemotion = function (event) {
-    if (event.rotationRate) {
-      pointElement(event, 10, papers[0]);
-      pointElement(event, 10, papers[1]);
-    }
-  };
+if (window.DeviceOrientationEvent !== undefined) {
+  // Listen for the deviceorientation event
+  window.addEventListener("deviceorientation", function(event) {
+    // Access alpha, beta, and gamma from the event
+    const alpha = event.alpha; // Rotation around the Z-axis (compass heading)
+    const beta = event.beta;   // Rotation around the X-axis (front-to-back tilt)
+    const gamma = event.gamma; // Rotation around the Y-axis (left-to-right tilt)
+
+    // You can apply transformations or other actions based on the device's orientation
+    pointElement(event, 10, papers[0]);
+    pointElement(event, 10, papers[1]);
+    test.text = `Z:${alpha} X:${beta} Y:${gamma}`
+  });
 }
 
 window.addEventListener("resize", () => {
