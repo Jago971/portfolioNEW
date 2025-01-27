@@ -269,6 +269,10 @@ document.addEventListener("mousemove", function (event) {
 //   test.textContent = "not working"
 // }
 
+
+
+
+
 if (window.DeviceOrientationEvent !== undefined) {
   // iOS devices (iOS 13+ might require permission)
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
@@ -305,6 +309,10 @@ function handleOrientation(event) {
   console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma); // Debug log
   test.textContent = `Z: ${alpha.toFixed(2)} X: ${beta.toFixed(2)} Y: ${gamma.toFixed(2)}`;
 }
+
+
+
+
 
 
 window.addEventListener("resize", () => {
