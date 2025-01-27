@@ -239,7 +239,7 @@ const content = {
 
 // ---------- onload ---------- //
 
-const test = document.querySelector("test")
+const test = document.querySelector(".test")
 
 deviceLayout(window.innerWidth);
 
