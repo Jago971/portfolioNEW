@@ -118,14 +118,10 @@ function pointElement(event, range, element) {
   if (event.type === "mousemove") {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
-  } else if (event.type === "deviceorientation") {
-    const { beta, gamma } = event;
-    percentX = ((gamma + 90) / 180).toFixed(2);
-    percentY = ((beta + 180) / 360).toFixed(2);
-  } else if (event.type === "touchmove") {
-    const touch = event.touches[0];
-    percentX = (touch.clientX / viewportWidth).toFixed(2);
-    percentY = (touch.clientY / viewportHeight).toFixed(2);
+  } else if (event.type === "devicemotion") {
+    const { rotationRate } = event;
+    percentX = ((rotationRate.gamma + 90) / 180).toFixed(2);
+    percentY = ((rotationRate.beta + 90) / 180).toFixed(2);
   }
 
   element.style.transform = `rotateX(${
@@ -256,21 +252,13 @@ document.addEventListener("mousemove", function (event) {
 });
 
 if (window.DeviceMotionEvent != undefined) {
-  // window.addEventListener("deviceorientation", (event) => {
-  //   pointElement(event, 10, papers[0]);
-  //   pointElement(event, 10, papers[1]);
-  // });
-  window.ondevicemotion = function (e) {
-    if (e.rotationRate) {
-      test.textContent = `working: X:${e.rotationRate.beta} Y:${e.rotationRate.gamma}`;
+  window.ondevicemotion = function (event) {
+    if (event.rotationRate) {
+      pointElement(event, 10, papers[0]);
+      pointElement(event, 10, papers[1]);
     }
   };
 }
-
-window.addEventListener("touchmove", (event) => {
-  pointElement(event, 10, papers[0]);
-  pointElement(event, 10, papers[1]);
-});
 
 window.addEventListener("resize", () => {
   drawLines();
