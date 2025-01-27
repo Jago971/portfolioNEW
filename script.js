@@ -254,14 +254,14 @@ if (window.DeviceOrientationEvent) {
   window.addEventListener("deviceorientation", (event) => {
     pointElement(event, 10, papers[0]);
   pointElement(event, 10, papers[1]);
-  test.textContent = `working: X:${event.beta} Y:${event.gamma}`
+  test.textContent = `working: ${event}`
   });
 }
 
 window.addEventListener("touchmove", (event) => {
   pointElement(event, 10, papers[0]);
 pointElement(event, 10, papers[1]);
-  test.textContent = `working: X:${event.clientX} Y:${event.clientY}`
+  test.textContent = `working: ${event}`
 });
 
 window.addEventListener("resize", () => {
