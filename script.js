@@ -249,7 +249,7 @@ document.addEventListener("mousemove", function (event) {
 });
 
 if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", (event) => {
+  window.addEventListener("orientstionchange", (event) => {
     pointElement(event, 10, papers[0]);
   pointElement(event, 10, papers[1]);
   });
