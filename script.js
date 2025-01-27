@@ -262,8 +262,10 @@ if (window.DeviceOrientationEvent !== undefined) {
     // You can apply transformations or other actions based on the device's orientation
     pointElement(event, 10, papers[0]);
     pointElement(event, 10, papers[1]);
-    test.text = `Z:${alpha} X:${beta} Y:${gamma}`
+    test.textContent = `Z:${alpha} X:${beta} Y:${gamma}`
   });
+} else {
+  test.textContent = "not working"
 }
 
 window.addEventListener("resize", () => {
