@@ -248,6 +248,18 @@ document.addEventListener("mousemove", function (event) {
   pointElement(event, 10, papers[1]);
 });
 
+if (window.DeviceOrientationEvent) {
+  window.addEventListener("deviceorientation", (event) => {
+    pointElement(event, 10, papers[0]);
+  pointElement(event, 10, papers[1]);
+  });
+}
+
+window.addEventListener("touchmove", (event) => {
+  pointElement(event, 10, papers[0]);
+pointElement(event, 10, papers[1]);
+});
+
 window.addEventListener("resize", () => {
   drawLines();
   deviceLayout(window.innerWidth);
