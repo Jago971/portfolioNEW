@@ -270,27 +270,20 @@ document.addEventListener("mousemove", function (event) {
 // }
 
 if (window.DeviceOrientationEvent !== undefined) {
-  // iOS devices (iOS 13+ might require permission)
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
-    console.log("Requesting permission...");
     DeviceOrientationEvent.requestPermission()
       .then(response => {
         if (response === "granted") {
-          console.log("Permission granted!");
-          window.addEventListener("deviceorientation", handleOrientation);
+          test.textContent = "permission granted"
         } else {
-          console.log("Permission denied for orientation data.");
-          test.textContent = "Permission not granted for orientation data.";
+          test.textContent = "permission not granted";
         }
       })
-      .catch(console.error);
   } else {
-    console.log("No permission needed (desktop or non-iOS).");
-    window.addEventListener("deviceorientation", handleOrientation);
+    test.textContent = "No permission needed (desktop or non-iOS).";
   }
 } else {
   test.textContent = "Device orientation not supported.";
-  console.log("Device orientation not supported on this device.");
 }
 
 function handleOrientation(event) {
@@ -298,7 +291,7 @@ function handleOrientation(event) {
   const beta = event.beta;
   const gamma = event.gamma;
 
-  console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma); // Debug log
+  console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
   test.textContent = `Z: ${alpha.toFixed(2)} X: ${beta.toFixed(2)} Y: ${gamma.toFixed(2)}`;
 }
 
