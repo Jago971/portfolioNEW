@@ -1,18 +1,18 @@
 // ---------- layout ---------- //
 
 function deviceLayout(width) {
-  const below = document.querySelector(".below")
+  const below = document.querySelector(".below");
   if (width > 768) {
     sections.forEach((section) => {
       section.classList.remove("mobile");
       section.classList.add("desktop");
-      below.style.display = "none"
+      below.style.display = "none";
     });
   } else {
     sections.forEach((section) => {
       section.classList.remove("desktop");
       section.classList.add("mobile");
-      below.style.display = "initial"
+      below.style.display = "initial";
     });
   }
 }
@@ -80,7 +80,7 @@ function moveFold(
   brightness2,
   lastFold = false
 ) {
-  const clickMe = fold1.querySelector(".click-me")
+  const clickMe = fold1.querySelector(".click-me");
   const content1 = fold1.querySelector(".content");
   const content2 = fold2.querySelector(".content");
   if (lastFold) {
@@ -90,7 +90,9 @@ function moveFold(
   fold1.style.filter = `brightness(${brightness1})`;
   fold2.style.filter = `brightness(${brightness2})`;
   setTimeout(() => {
-    if(clickMe) {clickMe.style.opacity = "0"}
+    if (clickMe) {
+      clickMe.style.opacity = "0";
+    }
     content1.style.opacity = "1";
   }, 300);
   animateHoles(fold1);
@@ -132,21 +134,21 @@ function pointElement(event, range, element) {
 }
 
 function drawHighlights(paper, includesBlacks = false) {
-  const highlights = paper.querySelectorAll("p span")
-  let increment = 0
+  const highlights = paper.querySelectorAll("p span");
+  let increment = 0;
   highlights.forEach((element, index) => {
-    if(window.innerWidth > 768 && element.classList.contains("below")) {
-      increment = 1
+    if (window.innerWidth > 768 && element.classList.contains("below")) {
+      increment = 1;
       return;
     }
-    element.style.backgroundRepeat = "no-repeat"
-    element.style.backgroundSize = "0% 100%"
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "0% 100%";
     element.style.animation = "fillGradient 0.5s ease forwards";
-    element.classList.remove("no-background")
-    element.style.animationDelay = `${(index - increment) * 0.5}s`
-    if(includesBlacks && (index === 11 || index === 12)) {
+    element.classList.remove("no-background");
+    element.style.animationDelay = `${(index - increment) * 0.5}s`;
+    if (includesBlacks && (index === 11 || index === 12)) {
       setTimeout(() => {
-        element.style.setProperty(`--width${index-10}`, "100%");
+        element.style.setProperty(`--width${index - 10}`, "100%");
       }, (index - increment) * 500);
     }
   });
@@ -155,7 +157,7 @@ function drawHighlights(paper, includesBlacks = false) {
 function unfoldPaper(paper, section) {
   moveFold(
     paper.querySelectorAll(".fold")[0],
-    0.90,
+    0.9,
     -10,
     paper.querySelectorAll(".fold")[2],
     0.95
@@ -173,13 +175,16 @@ function unfoldPaper(paper, section) {
   }, 1000);
 
   setTimeout(() => {
-    drawHighlights(paper, paperCount === 2)
+    drawHighlights(paper, paperCount === 2);
   }, 2000);
 
-  setTimeout(() => {
-    moveSection(section);
-    // scrollToNext(wrapper);
-  }, section === 0 ? 5500 : 8500);
+  setTimeout(
+    () => {
+      moveSection(section);
+      // scrollToNext(wrapper);
+    },
+    section === 0 ? 5500 : 8500
+  );
 }
 
 // ---------- declarations ---------- //
@@ -201,16 +206,16 @@ const content = {
     education: {
       coding: {},
       school: {},
-      extra: {}
+      extra: {},
     },
     cv: {
       text: {},
-      download: {}
+      download: {},
     },
     contect: {
       socialMedia: {},
-      contactForm: {}
-    }
+      contactForm: {},
+    },
   },
   projects: {
     spotlight: {
@@ -218,20 +223,20 @@ const content = {
         title: {},
         image: {},
         info: {},
-        link: {}
+        link: {},
       },
       project2: {
         title: {},
         image: {},
         info: {},
-        link: {}
+        link: {},
       },
       project3: {
         title: {},
         image: {},
         info: {},
-        link: {}
-      }
+        link: {},
+      },
     },
   },
   activity: {},
@@ -239,7 +244,7 @@ const content = {
 
 // ---------- onload ---------- //
 
-const test = document.querySelector(".test")
+const test = document.querySelector(".test");
 
 deviceLayout(window.innerWidth);
 
@@ -250,18 +255,21 @@ document.addEventListener("mousemove", function (event) {
   pointElement(event, 10, papers[1]);
 });
 
-if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", (event) => {
-    pointElement(event, 10, papers[0]);
-  pointElement(event, 10, papers[1]);
-  test.textContent = `working: ${event}`
-  });
+if (window.DeviceMotionEvent != undefined) {
+  // window.addEventListener("deviceorientation", (event) => {
+  //   pointElement(event, 10, papers[0]);
+  //   pointElement(event, 10, papers[1]);
+  // });
+  window.ondevicemotion = function (e) {
+    if (e.rotationRate) {
+      test.textContent = `working: X:${e.rotationRate.beta} Y:${e.rotationRate.gamma}`;
+    }
+  };
 }
 
 window.addEventListener("touchmove", (event) => {
   pointElement(event, 10, papers[0]);
-pointElement(event, 10, papers[1]);
-  test.textContent = `working: ${event}`
+  pointElement(event, 10, papers[1]);
 });
 
 window.addEventListener("resize", () => {
@@ -269,9 +277,11 @@ window.addEventListener("resize", () => {
   deviceLayout(window.innerWidth);
 });
 
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-  window.location.reload();
-});
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", () => {
+    window.location.reload();
+  });
 
 // ---------- execution ---------- //
 
@@ -285,7 +295,6 @@ papers.forEach((paper, index) => {
     }
   });
 });
-
 
 function pointCabinet(event) {
   const viewportWidth = window.innerWidth;
