@@ -239,6 +239,8 @@ const content = {
 
 // ---------- onload ---------- //
 
+const test = document.querySelector("test")
+
 deviceLayout(window.innerWidth);
 
 drawLines();
@@ -249,15 +251,17 @@ document.addEventListener("mousemove", function (event) {
 });
 
 if (window.DeviceOrientationEvent) {
-  window.addEventListener("orientstionchange", (event) => {
+  window.addEventListener("deviceorientation", (event) => {
     pointElement(event, 10, papers[0]);
   pointElement(event, 10, papers[1]);
+  test.textContent = `working: X:${event.beta} Y:${event.gamma}`
   });
 }
 
 window.addEventListener("touchmove", (event) => {
   pointElement(event, 10, papers[0]);
 pointElement(event, 10, papers[1]);
+  test.textContent = `working: X:${event.clientX} Y:${event.clientY}`
 });
 
 window.addEventListener("resize", () => {
@@ -317,61 +321,3 @@ drawers.forEach((drawer) => {
     openDrawer(drawer);
   });
 });
-
-// setTimeout(() => {
-//   moveFold(
-//     papers[1].querySelectorAll(".fold")[0],
-//     0.93,
-//     -15,
-//     papers[1].querySelectorAll(".fold")[2],
-//     0.96
-//   );
-// }, 1000);
-
-// setTimeout(() => {
-//   moveSection(1);
-// }, 3000);
-
-// setTimeout(() => {
-//   moveFold(
-//     papers[0].querySelectorAll(".fold")[0],
-//     0.93,
-//     -15,
-//     papers[0].querySelectorAll(".fold")[2],
-//     0.96
-//   );
-// }, 3750);
-
-// setTimeout(() => {
-//   moveFold(
-//     papers[0].querySelectorAll(".fold")[2],
-//     1,
-//     15,
-//     papers[0].querySelectorAll(".fold")[1],
-//     0.96,
-//     true
-//   );
-// }, 6000);
-
-// // setTimeout(() => {
-// //   drawHighlights(papers[0])
-// // }, 7000);
-
-// setTimeout(() => {
-//   moveSection(0);
-// }, 12500);
-
-// setTimeout(() => {
-//   moveFold(
-//     papers[1].querySelectorAll(".fold")[2],
-//     1,
-//     15,
-//     papers[1].querySelectorAll(".fold")[1],
-//     0.96,
-//     true
-//   );
-// }, 14500);
-
-// // setTimeout(() => {
-// //   drawHighlights(papers[1], true)
-// // }, 15500);
