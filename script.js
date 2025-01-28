@@ -98,58 +98,6 @@ function moveFold(
   animateHoles(fold1);
 }
 
-function animateHoles(fold) {
-  const hole = fold.querySelector(".hole");
-  hole.style.boxShadow = "none";
-  hole.style.animation = "hole-brightness 1s forwards";
-  setTimeout(() => {
-    hole.style.backgroundColor = "var(--bg)";
-    hole.style.transform = "initial";
-    hole.style.boxShadow = "inset 0.75cqi 0.75cqi 0.75cqi rgba(0, 0, 0, 0.25)";
-  }, 350);
-}
-
-function pointElement(event, range, element) {
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-
-  let percentX, percentY;
-
-  if (event.type === "mousemove") {
-    percentX = (event.clientX / viewportWidth).toFixed(2);
-    percentY = (event.clientY / viewportHeight).toFixed(2);
-  } else if (event.type === "deviceorientation") {
-    const { alpha, beta, gamma } = event;
-    percentX = ((gamma + 90) / 180).toFixed(2); // Adjust gamma (left-right tilt)
-    percentY = ((beta + 90) / 180).toFixed(2); // Adjust beta (front-back tilt)
-  }
-
-  element.style.transform = `rotateX(${
-    range * (2 * percentY - 1) * -1
-  }deg) rotateY(${range * (2 * percentX - 1)}deg)`;
-}
-
-function drawHighlights(paper, includesBlacks = false) {
-  const highlights = paper.querySelectorAll("p span");
-  let increment = 0;
-  highlights.forEach((element, index) => {
-    if (window.innerWidth > 768 && element.classList.contains("below")) {
-      increment = 1;
-      return;
-    }
-    element.style.backgroundRepeat = "no-repeat";
-    element.style.backgroundSize = "0% 100%";
-    element.style.animation = "fillGradient 0.5s ease forwards";
-    element.classList.remove("no-background");
-    element.style.animationDelay = `${(index - increment) * 0.5}s`;
-    if (includesBlacks && (index === 11 || index === 12)) {
-      setTimeout(() => {
-        element.style.setProperty(`--width${index - 10}`, "100%");
-      }, (index - increment) * 500);
-    }
-  });
-}
-
 function unfoldPaper(paper, section) {
   moveFold(
     paper.querySelectorAll(".fold")[0],
@@ -183,12 +131,59 @@ function unfoldPaper(paper, section) {
   );
 }
 
-// ---------- declarations ---------- //
+function animateHoles(fold) {
+  const hole = fold.querySelector(".hole");
+  hole.style.boxShadow = "none";
+  hole.style.animation = "hole-brightness 1s forwards";
+  setTimeout(() => {
+    hole.style.backgroundColor = "var(--bg)";
+    hole.style.transform = "initial";
+    hole.style.boxShadow = "inset 0.75cqi 0.75cqi 0.75cqi rgba(0, 0, 0, 0.25)";
+  }, 350);
+}
 
-const wrapper = document.querySelector(".wrapper");
-const sections = document.querySelectorAll("section");
-const papers = document.querySelectorAll(".paper");
-let paperCount = 0;
+function drawHighlights(paper, includesBlacks = false) {
+  const highlights = paper.querySelectorAll("p span");
+  let increment = 0;
+  highlights.forEach((element, index) => {
+    if (window.innerWidth > 768 && element.classList.contains("below")) {
+      increment = 1;
+      return;
+    }
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "0% 100%";
+    element.style.animation = "fillGradient 0.5s ease forwards";
+    element.classList.remove("no-background");
+    element.style.animationDelay = `${(index - increment) * 0.5}s`;
+    if (includesBlacks && (index === 11 || index === 12)) {
+      setTimeout(() => {
+        element.style.setProperty(`--width${index - 10}`, "100%");
+      }, (index - increment) * 500);
+    }
+  });
+}
+
+// ---------- perspective ---------- //
+
+function pointElement(event, range, element) {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+
+  let percentX, percentY;
+
+  if (event.type === "mousemove") {
+    percentX = (event.clientX / viewportWidth).toFixed(2);
+    percentY = (event.clientY / viewportHeight).toFixed(2);
+  } else if (event.type === "deviceorientation") {
+    const { alpha, beta, gamma } = event;
+    percentX = ((gamma + 90) / 180).toFixed(2); // Adjust gamma (left-right tilt)
+    percentY = ((beta + 90) / 180).toFixed(2); // Adjust beta (front-back tilt)
+  }
+
+  element.style.transform = `rotateX(${
+    range * (2 * percentY - 1) * -1
+  }deg) rotateY(${range * (2 * percentX - 1)}deg)`;
+}
 
 // ---------- content object ---------- //
 
@@ -238,6 +233,13 @@ const content = {
   activity: {},
 };
 
+// ---------- declarations ---------- //
+
+const wrapper = document.querySelector(".wrapper");
+const sections = document.querySelectorAll("section");
+const papers = document.querySelectorAll(".paper");
+let paperCount = 0;
+
 // ---------- onload ---------- //
 
 const test = document.querySelector(".test");
@@ -270,8 +272,6 @@ document.addEventListener("mousemove", function (event) {
 // }
 
 function permission() {
-  btn.style.display = "none";
-
   if (
     typeof DeviceMotionEvent !== "undefined" &&
     typeof DeviceMotionEvent.requestPermission === "function"
@@ -305,9 +305,6 @@ function handleOrientation(event) {
   test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
 }
 
-const btn = document.querySelector(".requestPermission");
-btn.addEventListener("click", permission);
-
 window.addEventListener("resize", () => {
   drawLines();
   deviceLayout(window.innerWidth);
@@ -327,8 +324,11 @@ papers.forEach((paper, index) => {
     if (paperCount === index) {
       unfoldPaper(paper, index);
       fold.classList.toggle("hover");
-      paperCount++;
     }
+    if(paperCount === 0) {
+      permission()
+    }
+    paperCount++;
   });
 });
 
