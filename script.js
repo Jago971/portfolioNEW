@@ -222,7 +222,7 @@ function pointCabinet(event) {
 
     cabinet.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-    test.textContent = `${rotateY.toFixed(2)}, ${rotateX.toFixed(2)}`
+    test.textContent = `${rotateY}, ${rotateX}`
   }
 }
 
