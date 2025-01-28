@@ -220,9 +220,9 @@ function pointCabinet(event) {
     rotateX = beta
     rotateY = gamma
 
-    cabinet.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    cabinet.style.transform = `rotateX(${-rotateX}deg) rotateY(${-rotateY}deg)`;
 
-    test.textContent = `${rotateY}, ${rotateX}`
+    test.textContent = `${-rotateY}, ${-rotateX}`
   }
 }
 
