@@ -198,6 +198,7 @@ function openDrawer(drawer) {
 // }
 
 function pointCabinet(event) {
+  const test = document.querySelector(".test");
   const cabinet = document.querySelector(".cabinet-body");
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
@@ -212,19 +213,19 @@ function pointCabinet(event) {
     const { gamma, beta } = event;
     percentX = ((gamma + 90) / 180).toFixed(2);
     percentY = ((beta + 90) / 180).toFixed(2);
-  }
+
+    function nonlinearScale(value) {
+      const scaled = (value - 0.5) * 2;
+      return Math.pow(scaled, 3);
+    }
   
-  function nonlinearScale(value) {
-    const scaled = (value - 0.5) * 2;
-    return Math.pow(scaled, 3);
+    const scaledPercentX = nonlinearScale(percentX);
+  
+    cabinet.style.transform = `rotateX(${
+      7.5 * percentY * -1 - 20
+    }deg) rotateY(${45 * scaledPercentX}deg)`;
+    test.textContent = `${percentY}, ${scaledPercentX}`
   }
-
-  const scaledPercentX = nonlinearScale(percentX);
-
-  cabinet.style.transform = `rotateX(${
-    7.5 * percentY * -1 - 20
-  }deg) rotateY(${45 * scaledPercentX}deg)`;
-  test.textContent = `${percentY}, ${scaledPercentX}`
 }
 
 // ---------- content object ---------- //
@@ -241,7 +242,6 @@ const wrapper = document.querySelector(".wrapper");
 const sections = document.querySelectorAll("section");
 const papers = document.querySelectorAll(".paper");
 const drawers = document.querySelectorAll(".cabinet-drawer");
-const test = document.querySelector(".test");
 let clickCount = 0;
 
 // ---------- onload ---------- //
