@@ -295,20 +295,23 @@ function permission() {
         console.error("Error requesting permission:", error);
       });
   } else if ("DeviceMotionEvent" in window) {
-    window.addEventListener("deviceorientation", (event) => {pointCabinet(event)});
+    window.addEventListener("deviceorientation", (event) => {
+      pointCabinet(event)
+      handleOrientation(event)
+    });
   } else {
     alert("DeviceMotionEvent is not supported on this device or browser.");
   }
 }
 
-// function handleOrientation(event) {
-//   const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
-//   const beta = event.beta ? event.beta.toFixed(2) : 0;
-//   const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
+function handleOrientation(event) {
+  const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
+  const beta = event.beta ? event.beta.toFixed(2) : 0;
+  const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
 
-//   console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
-//   test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
-// }
+  console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
+  test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
+}
 
 // ---------- execution ---------- //
 

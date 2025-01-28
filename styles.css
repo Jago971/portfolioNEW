@@ -273,7 +273,6 @@ p:first-of-type {
   width: 100%;
   overflow-y: auto;
   scroll-snap-type: y proximity;
-  -webkit-scroll-snap-type: y proximity;
   overflow-x: hidden;
 }
 
@@ -324,9 +323,7 @@ section:nth-of-type(2) {
   aspect-ratio: 1 / 1.441;
   display: grid;
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   perspective: 1500px;
-  -webkit-perspective: 1500px;
 }
 
 .fold {
@@ -505,7 +502,6 @@ img {
   height: 35.4125vw;
 
   perspective: 1250px;
-  -webkit-perspective: 1250px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -516,7 +512,6 @@ img {
   width: 100cqw;
   position: relative;
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -582,7 +577,6 @@ img {
   position: relative;
   container-type: size;
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   transform: translateZ(10cqw);
   transition: transform 0.5s ease-in-out;
 
@@ -593,7 +587,6 @@ img {
   .front {
     background-color: rgb(195, 198, 200);
     transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
   }
 
   .left,
@@ -692,7 +685,6 @@ img {
   position: absolute;
   container-type: size;
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   width: 98cqw;
   height: 66cqh;
   background-color: rgb(255, 254, 237);
@@ -760,4 +752,10 @@ img {
     width: 45vw;
     height: 127.5vw;
   }
+}
+
+.test {
+  position: absolute;
+  font-size: 10rem;
+  color: pink
 }
