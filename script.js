@@ -198,6 +198,7 @@ function openDrawer(drawer) {
 // }
 
 function pointCabinet(event) {
+  const cabinet = document.querySelector(".cabinet-body");
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
@@ -210,12 +211,12 @@ function pointCabinet(event) {
   } else if (event.type === "deviceorientation") {
     const { alpha, beta, gamma } = event;
     percentX = ((beta + 90) / 180).toFixed(2);
-    test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
   }
-
-  const cabinet = document.querySelector(".cabinet-body");
   
   cabinet.style.transform = `rotateX(${
+    7.5 * (2 * percentY - 1) * -1 - 20
+  }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
+  test.textContent = `rotateX(${
     7.5 * (2 * percentY - 1) * -1 - 20
   }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
 }
