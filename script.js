@@ -233,7 +233,7 @@ const sections = document.querySelectorAll("section");
 const papers = document.querySelectorAll(".paper");
 const drawers = document.querySelectorAll(".cabinet-drawer");
 const test = document.querySelector(".test");
-let paperCount = 0;
+let clickCount = 0;
 
 // ---------- onload ---------- //
 
@@ -317,14 +317,15 @@ function permission() {
 papers.forEach((paper, index) => {
   const fold = paper.querySelector(".fold");
   fold.addEventListener("click", () => {
-    if(index === 0) {
+    if(clickCount === 0) {
       permission();
     }
-    if (paperCount === index) {
+    if (clickCount === index) {
       unfoldPaper(paper, index);
       fold.classList.toggle("hover");
     }
-    paperCount++;
+    if(clickCount < 3)
+    clickCount++;
   });
 });
 
