@@ -217,10 +217,10 @@ function pointCabinet(event) {
 
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
-    rotateX = -beta
-    rotateY = -gamma
+    rotateX = beta
+    rotateY = gamma
 
-    cabinet.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+    cabinet.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
     test.textContent = `${rotateY.toFixed(2)}, ${rotateX.toFixed(2)}`
   }
@@ -303,7 +303,6 @@ function permission() {
   } else if ("DeviceMotionEvent" in window) {
     window.addEventListener("deviceorientation", (event) => {
       pointCabinet(event)
-      handleOrientation(event)
     });
   } else {
     alert("DeviceMotionEvent is not supported on this device or browser.");
