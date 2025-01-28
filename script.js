@@ -216,11 +216,12 @@ function pointCabinet(event) {
     test.textContent = `${rotateY}, ${rotateX}`
 
   } else if (event.type === "deviceorientation") {
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const { gamma, beta } = event;
     rotateX = -beta + 45
     rotateY = gamma
 
-    cabinet.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    cabinet.style.transform = `rotateX(${clamp(rotateX, -45, 45)}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
 
     test.textContent = `${rotateY}, ${rotateX}`
   }
