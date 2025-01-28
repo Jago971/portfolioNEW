@@ -209,7 +209,8 @@ function pointCabinet(event) {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
   } else if (event.type === "deviceorientation") {
-    const { beta } = event;
+    const { gamma, beta } = event;
+    percentX = ((gamma + 90) / 180).toFixed(2);
     percentY = ((beta + 90) / 180).toFixed(2);
   }
   
