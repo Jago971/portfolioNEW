@@ -216,7 +216,7 @@ function pointCabinet(event) {
   
   function nonlinearScale(value) {
     const scaled = (value - 0.5) * 2;
-    return scaled * Math.abs(scaled);
+    return Math.sign(scaled) * Math.sqrt(Math.abs(scaled));
   }
 
   const scaledPercentX = nonlinearScale(percentX);
