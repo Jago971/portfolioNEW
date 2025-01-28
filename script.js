@@ -269,44 +269,44 @@ document.addEventListener("mousemove", function (event) {
 //   test.textContent = "not working"
 // }
 
+function permission() {
+  btn.style.display = "none";
 
-
-
-if (typeof DeviceOrientationEvent.requestPermission === "function") {
-  console.log("Requesting permission...");
-  DeviceOrientationEvent.requestPermission()
-    .then((response) => {
-      if (response === "granted") {
-        console.log("permission granted");
-        window.addEventListener("deviceorientation", handleOrientation);
-        test.textContent = "permission denied";
-      } else {
-        console.log("permission denied");
-        test.textContent = "permission denied";
-      }
-    })
-    .catch(console.error);
-} else {
-  console.log("Device orientation available");
-  window.addEventListener("deviceorientation", (event) => {
-    pointElement(event, 45, papers[0]);
-    pointElement(event, 45, papers[1]);
-  });
+  if (
+    typeof DeviceMotionEvent !== "undefined" &&
+    typeof DeviceMotionEvent.requestPermission === "function"
+  ) {
+    DeviceMotionEvent.requestPermission()
+      .then((response) => {
+        if (response === "granted") {
+          window.addEventListener("devicemotion", handleOrientation);
+        } else {
+          alert("Permission denied. Unable to access device motion data.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error requesting permission:", error);
+      });
+  } else if ("DeviceMotionEvent" in window) {
+    // For platforms that don't require permission (e.g., Android)
+    console.log("DeviceMotionEvent available without permission.");
+    window.addEventListener("devicemotion", handleOrientation);
+  } else {
+    alert("DeviceMotionEvent is not supported on this device or browser.");
+  }
 }
 
 function handleOrientation(event) {
-  const alpha = event.alpha;
-  const beta = event.beta;
-  const gamma = event.gamma;
+  const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
+  const beta = event.beta ? event.beta.toFixed(2) : 0;
+  const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
 
   console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
-  test.textContent = `Z: ${alpha.toFixed(2)} X: ${beta.toFixed(
-    2
-  )} Y: ${gamma.toFixed(2)}`;
+  test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
 }
 
-
-
+const btn = document.querySelector(".requestPermission");
+btn.addEventListener("click", permission);
 
 window.addEventListener("resize", () => {
   drawLines();
