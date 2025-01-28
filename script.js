@@ -221,7 +221,7 @@ function pointCabinet(event) {
     rotateX = -beta + 45
     rotateY = gamma
 
-    cabinet.style.transform = `rotateX(${clamp(rotateX, -45, 45)}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
+    cabinet.style.transform = `rotateX(${clamp(rotateX, -45, 10)}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
 
     test.textContent = `${rotateY}, ${rotateX}`
   }
