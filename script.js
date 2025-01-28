@@ -209,14 +209,11 @@ function pointCabinet(event) {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
   } else if (event.type === "deviceorientation") {
-    const { alpha, beta, gamma } = event;
-    percentX = ((beta + 90) / 180).toFixed(2);
+    const { beta } = event;
+    percentY = ((beta + 90) / 180).toFixed(2);
   }
   
   cabinet.style.transform = `rotateX(${
-    7.5 * (2 * percentY - 1) * -1 - 20
-  }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
-  test.textContent = `rotateX(${
     7.5 * (2 * percentY - 1) * -1 - 20
   }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
 }
@@ -244,7 +241,7 @@ deviceLayout(window.innerWidth);
 
 drawLines();
 
-document.addEventListener("click", permission);
+permission();
 
 window.addEventListener("resize", () => {
   drawLines();
@@ -320,6 +317,9 @@ function permission() {
 papers.forEach((paper, index) => {
   const fold = paper.querySelector(".fold");
   fold.addEventListener("click", () => {
+    if(index === 0) {
+      permission();
+    }
     if (paperCount === index) {
       unfoldPaper(paper, index);
       fold.classList.toggle("hover");
