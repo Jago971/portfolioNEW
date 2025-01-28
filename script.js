@@ -181,20 +181,20 @@ function openDrawer(drawer) {
 //   const viewportWidth = window.innerWidth;
 //   const viewportHeight = window.innerHeight;
 
-//   let percentX = 0
-//   let percentY = 0;
+//   let rotateX = 0
+//   let rotateY = 0;
 
 //   if (event.type === "mousemove") {
-//     percentX = (event.clientX / viewportWidth).toFixed(2);
-//     percentY = (event.clientY / viewportHeight).toFixed(2);
+//     rotateX = (event.clientX / viewportWidth).toFixed(2);
+//     rotateY = (event.clientY / viewportHeight).toFixed(2);
 //   } else if (event.type === "deviceorientation") {
 //     const { beta } = event;
-//     percentY = ((beta + 90) / 180).toFixed(2); // Adjust beta (front-back tilt)
+//     rotateY = ((beta + 90) / 180).toFixed(2); // Adjust beta (front-back tilt)
 //   }
 
 //   element.style.transform = `rotateX(${
-//     range * (2 * percentY - 1) * -1
-//   }deg) rotateY(${range * (2 * percentX - 1)}deg)`;
+//     range * (2 * rotateY - 1) * -1
+//   }deg) rotateY(${range * (2 * rotateX - 1)}deg)`;
 // }
 
 function pointCabinet(event) {
@@ -203,35 +203,36 @@ function pointCabinet(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  let percentX = 0
-  let percentY = 0;
+  let rotateX = 0
+  let rotateY = 0;
 
   if (event.type === "mousemove") {
-    percentX = (event.clientX / viewportWidth).toFixed(2);
-    percentY = (event.clientY / viewportHeight).toFixed(2);
-
+    rotateX = (event.clientY / viewportHeight).toFixed(2);
+    rotateY = (event.clientX / viewportWidth).toFixed(2);
+    
     cabinet.style.transform = `rotateX(${
-      7.5 * percentY * -1 - 20
-    }deg) rotateY(${45 * percentX - 22.5}deg)`;
-    test.textContent = `${percentY}, ${percentX}`
+      7.5 * rotateX * -1 - 20
+    }deg) rotateY(${45 * rotateY - 22.5}deg)`;
+    test.textContent = `${rotateY}, ${rotateX}`
 
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
-    // percentX = ((gamma + 90) / 180) * 2 - 1;
-    // percentY = ((beta + 90) / 180).toFixed(2);
+    rotateX = beta
+    rotateY = gamma
 
+    cabinet.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+
+    test.textContent = `${rotateY}, ${rotateX}`
     // function nonlinearScale(value) {
     //   const scaled = (value - 0.5) * 2;
     //   return Math.pow(scaled, 3).toFixed(2);
     // }
 
-    // const scaledPercentX = nonlinearScale(percentX);
+    // const scaledPercentX = nonlinearScale(rotateX);
 
     // cabinet.style.transform = `rotateX(${
-    //   7.5 * (2 * percentY - 1) * -1
+    //   7.5 * (2 * rotateY - 1) * -1
     // }deg) rotateY(${90 * scaledPercentX}deg)`;
-
-    test.textContent = `${gamma.toFixed(2)}, ${beta.toFixed(2)}`;
   }
 }
 
