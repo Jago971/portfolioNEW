@@ -209,6 +209,12 @@ function pointCabinet(event) {
   if (event.type === "mousemove") {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
+
+    cabinet.style.transform = `rotateX(${
+      7.5 * percentY * -1 - 20
+    }deg) rotateY(${45 * percentY}deg)`;
+    test.textContent = `${percentY}, ${percentX}`
+
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
     percentX = ((gamma + 90) / 180).toFixed(2);
