@@ -286,7 +286,7 @@ function permission() {
     DeviceMotionEvent.requestPermission()
       .then((response) => {
         if (response === "granted") {
-          window.addEventListener("deviceorientation", pointCabinet);
+          window.addEventListener("deviceorientation", (event) => {pointCabinet(event)});
         } else {
           alert("Permission denied. Unable to access device motion data.");
         }
@@ -295,7 +295,7 @@ function permission() {
         console.error("Error requesting permission:", error);
       });
   } else if ("DeviceMotionEvent" in window) {
-    window.addEventListener("deviceorientation", pointCabinet);
+    window.addEventListener("deviceorientation", (event) => {pointCabinet(event)});
   } else {
     alert("DeviceMotionEvent is not supported on this device or browser.");
   }
