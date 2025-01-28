@@ -222,18 +222,7 @@ function pointCabinet(event) {
 
     cabinet.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
 
-    test.textContent = `${rotateY}, ${rotateX}`
-    // function nonlinearScale(value) {
-    //   const scaled = (value - 0.5) * 2;
-    //   return Math.pow(scaled, 3).toFixed(2);
-    // }
-
-    // const scaledPercentX = nonlinearScale(rotateX);
-
-    // cabinet.style.transform = `rotateX(${
-    //   7.5 * (2 * rotateY - 1) * -1
-    // }deg) rotateY(${90 * scaledPercentX}deg)`;
-  }
+    test.textContent = `${rotateY.toFixed(2)}, ${rotateX.toFixed(2)}`
 }
 
 // ---------- content object ---------- //
