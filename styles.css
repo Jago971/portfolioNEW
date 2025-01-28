@@ -660,10 +660,6 @@ img {
   transform: translateZ(83cqw);
 }
 
-.closed > .front:hover > .name-tag {
-  transform: scale(1.5) translateZ(20cqw);
-}
-
 .handle {
   width: 50%;
   height: 10%;

@@ -119,7 +119,7 @@ function unfoldPaper(paper, section) {
   }, 1000);
 
   setTimeout(() => {
-    drawHighlights(paper, paperCount === 2);
+    drawHighlights(paper, clickCount === 2);
   }, 2000);
 
   setTimeout(
@@ -326,7 +326,6 @@ papers.forEach((paper, index) => {
     }
     if (clickCount === index) {
       unfoldPaper(paper, index);
-      fold.classList.toggle("hover");
     }
     if(clickCount < 3)
     clickCount++;
