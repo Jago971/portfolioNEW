@@ -279,7 +279,7 @@ function permission() {
     DeviceMotionEvent.requestPermission()
       .then((response) => {
         if (response === "granted") {
-          window.addEventListener("devicemotion", handleOrientation);
+          window.addEventListener("deviceorientation", handleOrientation);
         } else {
           alert("Permission denied. Unable to access device motion data.");
         }
@@ -290,7 +290,7 @@ function permission() {
   } else if ("DeviceMotionEvent" in window) {
     // For platforms that don't require permission (e.g., Android)
     console.log("DeviceMotionEvent available without permission.");
-    window.addEventListener("devicemotion", handleOrientation);
+    window.addEventListener("deviceorientation", handleOrientation);
   } else {
     alert("DeviceMotionEvent is not supported on this device or browser.");
   }
