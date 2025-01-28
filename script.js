@@ -208,8 +208,9 @@ function pointCabinet(event) {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
   } else if (event.type === "deviceorientation") {
-    const { beta } = event;
+    const { alpha, beta, gamma } = event;
     percentX = ((beta + 90) / 180).toFixed(2);
+    test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
   }
 
   const cabinet = document.querySelector(".cabinet-body");
@@ -304,14 +305,14 @@ function permission() {
   }
 }
 
-function handleOrientation(event) {
-  const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
-  const beta = event.beta ? event.beta.toFixed(2) : 0;
-  const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
+// function handleOrientation(event) {
+//   const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
+//   const beta = event.beta ? event.beta.toFixed(2) : 0;
+//   const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
 
-  console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
-  test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
-}
+//   console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
+//   test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
+// }
 
 // ---------- execution ---------- //
 
