@@ -217,12 +217,12 @@ function pointCabinet(event) {
 
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
-    rotateX = beta
+    rotateX = -beta + 45
     rotateY = gamma
 
-    cabinet.style.transform = `rotateX(${-rotateX}deg) rotateY(${-rotateY}deg)`;
+    cabinet.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-    test.textContent = `${-rotateY}, ${-rotateX}`
+    test.textContent = `${rotateY}, ${rotateX}`
   }
 }
 
