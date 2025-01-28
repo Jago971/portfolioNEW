@@ -231,7 +231,7 @@ function pointCabinet(event) {
     //   7.5 * (2 * percentY - 1) * -1
     // }deg) rotateY(${90 * scaledPercentX}deg)`;
 
-    test.textContent = `${gamma}, ${beta}`;
+    test.textContent = `${gamma.toFixed(2)}, ${beta.toFixed(2)}`;
   }
 }
 
