@@ -163,73 +163,67 @@ function drawHighlights(paper, includesBlacks = false) {
   });
 }
 
+function openDrawer(drawer) {
+  const shadow = drawer.querySelector(".shadow");
+  const isOpen = drawer.classList.toggle("open");
+  setTimeout(
+    () => {
+      drawer.classList.toggle("closed");
+      shadow.style.backgroundColor = "black";
+    },
+    isOpen ? 0 : 600
+  );
+}
+
 // ---------- perspective ---------- //
 
-function pointElement(event, range, element) {
+// function pointElement(event, range, element) {
+//   const viewportWidth = window.innerWidth;
+//   const viewportHeight = window.innerHeight;
+
+//   let percentX = 0
+//   let percentY = 0;
+
+//   if (event.type === "mousemove") {
+//     percentX = (event.clientX / viewportWidth).toFixed(2);
+//     percentY = (event.clientY / viewportHeight).toFixed(2);
+//   } else if (event.type === "deviceorientation") {
+//     const { beta } = event;
+//     percentY = ((beta + 90) / 180).toFixed(2); // Adjust beta (front-back tilt)
+//   }
+
+//   element.style.transform = `rotateX(${
+//     range * (2 * percentY - 1) * -1
+//   }deg) rotateY(${range * (2 * percentX - 1)}deg)`;
+// }
+
+function pointCabinet(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  let percentX, percentY;
+  let percentX = 0
+  let percentY = 0;
 
   if (event.type === "mousemove") {
     percentX = (event.clientX / viewportWidth).toFixed(2);
     percentY = (event.clientY / viewportHeight).toFixed(2);
   } else if (event.type === "deviceorientation") {
-    const { alpha, beta, gamma } = event;
-    percentX = ((gamma + 90) / 180).toFixed(2); // Adjust gamma (left-right tilt)
-    percentY = ((beta + 90) / 180).toFixed(2); // Adjust beta (front-back tilt)
+    const { beta } = event;
+    percentY = ((beta + 90) / 180).toFixed(2);
   }
 
-  element.style.transform = `rotateX(${
-    range * (2 * percentY - 1) * -1
-  }deg) rotateY(${range * (2 * percentX - 1)}deg)`;
+  const cabinet = document.querySelector(".cabinet-body");
+  
+  cabinet.style.transform = `rotateX(${
+    7.5 * (2 * percentY - 1) * -1 - 20
+  }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
 }
 
 // ---------- content object ---------- //
 
 const content = {
-  about: {
-    "information about me": {
-      profile: {},
-      interests: {},
-      hobbies: {},
-    },
-    education: {
-      coding: {},
-      school: {},
-      extra: {},
-    },
-    cv: {
-      text: {},
-      download: {},
-    },
-    contect: {
-      socialMedia: {},
-      contactForm: {},
-    },
-  },
-  projects: {
-    spotlight: {
-      project1: {
-        title: {},
-        image: {},
-        info: {},
-        link: {},
-      },
-      project2: {
-        title: {},
-        image: {},
-        info: {},
-        link: {},
-      },
-      project3: {
-        title: {},
-        image: {},
-        info: {},
-        link: {},
-      },
-    },
-  },
+  about: {},
+  projects: {},
   activity: {},
 };
 
@@ -238,20 +232,33 @@ const content = {
 const wrapper = document.querySelector(".wrapper");
 const sections = document.querySelectorAll("section");
 const papers = document.querySelectorAll(".paper");
+const drawers = document.querySelectorAll(".cabinet-drawer");
+const test = document.querySelector(".test");
 let paperCount = 0;
 
 // ---------- onload ---------- //
-
-const test = document.querySelector(".test");
 
 deviceLayout(window.innerWidth);
 
 drawLines();
 
-document.addEventListener("mousemove", function (event) {
-  pointElement(event, 10, papers[0]);
-  pointElement(event, 10, papers[1]);
+document.addEventListener("click", permission);
+
+window.addEventListener("resize", () => {
+  drawLines();
+  deviceLayout(window.innerWidth);
 });
+
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", () => {
+    window.location.reload();
+  });
+
+// document.addEventListener("mousemove", function (event) {
+//   pointElement(event, 10, papers[0]);
+//   pointElement(event, 10, papers[1]);
+// });
 
 // if (window.DeviceOrientationEvent !== undefined) {
 //   // Listen for the deviceorientation event
@@ -279,7 +286,7 @@ function permission() {
     DeviceMotionEvent.requestPermission()
       .then((response) => {
         if (response === "granted") {
-          window.addEventListener("deviceorientation", handleOrientation);
+          window.addEventListener("deviceorientation", pointCabinet);
         } else {
           alert("Permission denied. Unable to access device motion data.");
         }
@@ -288,33 +295,20 @@ function permission() {
         console.error("Error requesting permission:", error);
       });
   } else if ("DeviceMotionEvent" in window) {
-    // For platforms that don't require permission (e.g., Android)
-    console.log("DeviceMotionEvent available without permission.");
-    window.addEventListener("deviceorientation", handleOrientation);
+    window.addEventListener("deviceorientation", pointCabinet);
   } else {
     alert("DeviceMotionEvent is not supported on this device or browser.");
   }
 }
 
-function handleOrientation(event) {
-  const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
-  const beta = event.beta ? event.beta.toFixed(2) : 0;
-  const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
+// function handleOrientation(event) {
+//   const alpha = event.alpha ? event.alpha.toFixed(2) : 0;
+//   const beta = event.beta ? event.beta.toFixed(2) : 0;
+//   const gamma = event.gamma ? event.gamma.toFixed(2) : 0;
 
-  console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
-  test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
-}
-
-window.addEventListener("resize", () => {
-  drawLines();
-  deviceLayout(window.innerWidth);
-});
-
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", () => {
-    window.location.reload();
-  });
+//   console.log("alpha:", alpha, "beta:", beta, "gamma:", gamma);
+//   test.textContent = `Z: ${alpha} X: ${beta} Y: ${gamma}`;
+// }
 
 // ---------- execution ---------- //
 
@@ -325,41 +319,13 @@ papers.forEach((paper, index) => {
       unfoldPaper(paper, index);
       fold.classList.toggle("hover");
     }
-    if(paperCount === 0) {
-      permission()
-    }
     paperCount++;
   });
 });
 
-function pointCabinet(event) {
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-  const percentX = (event.clientX / viewportWidth).toFixed(2);
-  const percentY = (event.clientY / viewportHeight).toFixed(2);
-  const cabinet = document.querySelector(".cabinet-body");
-  cabinet.style.transform = `rotateX(${
-    15 * (1.25 * percentY - 1) * -1 - 30
-  }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
-}
-
-function openDrawer(drawer) {
-  const shadow = drawer.querySelector(".shadow");
-  const isOpen = drawer.classList.toggle("open");
-  setTimeout(
-    () => {
-      drawer.classList.toggle("closed");
-      shadow.style.backgroundColor = "black";
-    },
-    isOpen ? 0 : 600
-  );
-}
-
 document.addEventListener("mousemove", function (event) {
   pointCabinet(event);
 });
-
-const drawers = document.querySelectorAll(".cabinet-drawer");
 
 drawers.forEach((drawer) => {
   drawer.addEventListener("click", () => {
