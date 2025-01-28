@@ -212,7 +212,7 @@ function pointCabinet(event) {
 
     cabinet.style.transform = `rotateX(${
       7.5 * percentY * -1 - 20
-    }deg) rotateY(${45 * percentX}deg)`;
+    }deg) rotateY(${45 * percentX - 22.5}deg)`;
     test.textContent = `${percentY}, ${percentX}`
 
   } else if (event.type === "deviceorientation") {
