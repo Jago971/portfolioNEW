@@ -209,7 +209,7 @@ function pointCabinet(event) {
     percentY = (event.clientY / viewportHeight).toFixed(2);
   } else if (event.type === "deviceorientation") {
     const { beta } = event;
-    percentY = ((beta + 90) / 180).toFixed(2);
+    percentX = ((beta + 90) / 180).toFixed(2);
   }
 
   const cabinet = document.querySelector(".cabinet-body");
