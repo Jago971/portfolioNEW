@@ -217,7 +217,7 @@ function pointCabinet(event) {
 
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
-    percentX = ((gamma + 90) / 180).toFixed(2) * 3;
+    percentX = ((gamma + 90) / 180).toFixed(2);
     percentY = ((beta + 90) / 180).toFixed(2);
 
     function nonlinearScale(value) {
@@ -228,7 +228,7 @@ function pointCabinet(event) {
     const scaledPercentX = nonlinearScale(percentX);
   
     cabinet.style.transform = `rotateX(${
-      7.5 * percentY * -1
+      7.5 * (2 * percentY - 1) * -1
     }deg) rotateY(${45 * scaledPercentX}deg)`;
     test.textContent = `${percentY}, ${scaledPercentX}`
   }
