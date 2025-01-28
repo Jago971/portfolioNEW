@@ -220,11 +220,11 @@ function pointCabinet(event) {
   }
 
   const scaledPercentX = nonlinearScale(percentX);
-  const scaledPercentY = nonlinearScale(percentY);
 
   cabinet.style.transform = `rotateX(${
-    7.5 * scaledPercentY * -1 - 20
+    7.5 * percentY * -1 - 20
   }deg) rotateY(${45 * scaledPercentX}deg)`;
+  test.textContent = `${percentY}, ${scaledPercentX}`
 }
 
 // ---------- content object ---------- //
