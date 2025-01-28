@@ -210,13 +210,21 @@ function pointCabinet(event) {
     percentY = (event.clientY / viewportHeight).toFixed(2);
   } else if (event.type === "deviceorientation") {
     const { gamma, beta } = event;
-    percentX = ((gamma + 90) / 180).toFixed(2);
+    percentX = ((gamma + 90) / 180).toFixed(2) * 1.5;
     percentY = ((beta + 90) / 180).toFixed(2);
   }
   
+  function nonlinearScale(value) {
+    const scaled = (value - 0.5) * 2;
+    return scaled * Math.abs(scaled);
+  }
+
+  const scaledPercentX = nonlinearScale(percentX);
+  const scaledPercentY = nonlinearScale(percentY);
+
   cabinet.style.transform = `rotateX(${
-    7.5 * (2 * percentY - 1) * -1 - 20
-  }deg) rotateY(${22.5 * (2 * percentX - 1)}deg)`;
+    7.5 * scaledPercentY * -1 - 20
+  }deg) rotateY(${30 * scaledPercentX}deg)`;
 }
 
 // ---------- content object ---------- //
