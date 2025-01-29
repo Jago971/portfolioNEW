@@ -206,7 +206,7 @@ function pointCabinet(event) {
   let rotateX = 0
   let rotateY = 0;
 
-  if (event.type === "mousemove") {
+  if (event.type === "mousemove" && viewportWidth < 768) {
     rotateX = (event.clientY / viewportHeight).toFixed(2);
     rotateY = (event.clientX / viewportWidth).toFixed(2);
     
