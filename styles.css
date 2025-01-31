@@ -454,7 +454,7 @@ img {
 
 .paper .fold:nth-of-type(1) .margin-left .hole {
     background-color: var(--paper-bg);
-    transform: scaleY(-1);
+    transform: rotateX(180deg);
 }
 
 .paper .fold:nth-of-type(2) .margin-left {
@@ -473,7 +473,7 @@ img {
 
 .paper .fold:nth-of-type(3) .margin-left .hole {
     background-color: var(--paper-bg);
-    transform: scaleY(-1);
+    transform: rotateX(180deg);
   }
 
 
