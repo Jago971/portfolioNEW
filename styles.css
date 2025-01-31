@@ -48,19 +48,19 @@ h1 {
   font-size: calc((100cqh / 12) * 2.5);
   font-family: cabin sketch;
   font-weight: bold;
+}
 
-  span {
-    display: inline-block;
-    font-size: calc((100cqh / 12) * 3.5);
-  }
+h1 > span {
+  display: inline-block;
+  font-size: calc((100cqh / 12) * 3.5);
+}
 
-  .name {
-    color: rgb(0, 128, 128);
-  }
+.name {
+  color: rgb(0, 128, 128);
+}
 
-  .job {
-    color: rgb(128, 0, 128);
-  }
+.job {
+  color: rgb(128, 0, 128);
 }
 
 h1:first-of-type:not(.click-me) {
@@ -71,180 +71,181 @@ p {
   line-height: calc((100cqh / 12) * 2);
   font-size: calc((100cqh / 12) * 1.25);
   font-family: indie flower;
+}
 
-  span {
-    display: inline-block;
-    border-radius: 0.5cqi;
-    transition: transform 0.1s ease-in-out;
-  }
+p > span {
+  display: inline-block;
+  border-radius: 0.5cqi;
+  transition: transform 0.1s ease-in-out;
+}
 
-  .basic {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(255, 105, 180, 0.5) 15%,
-      /* bright pink with transparency */ rgb(255, 105, 180) 85%,
-      /* bright pink */ transparent 95%
-    );
-  }
-  .javascript {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(247, 223, 30, 0.5) 15%,
-      rgb(247, 223, 30) 85%,
-      transparent 95%
-    );
-  }
+.basic {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(255, 105, 180, 0.5) 15%,
+    /* bright pink with transparency */ rgb(255, 105, 180) 85%,
+    /* bright pink */ transparent 95%
+  );
+}
 
-  .react {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(97, 218, 251, 0.5) 15%,
-      rgb(97, 218, 251, 1) 85%,
-      transparent 95%
-    );
-  }
+.javascript {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(247, 223, 30, 0.5) 15%,
+    rgb(247, 223, 30) 85%,
+    transparent 95%
+  );
+}
 
-  .vite {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(138, 43, 226, 0.5) 15%,
-      rgb(138, 43, 226, 0.6) 85%,
-      transparent 95%
-    );
-  }
+.react {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(97, 218, 251, 0.5) 15%,
+    rgb(97, 218, 251, 1) 85%,
+    transparent 95%
+  );
+}
 
-  .node {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(143, 197, 62, 0.5) 15%,
-      rgb(143, 197, 62, 0.75) 85%,
-      transparent 95%
-    );
-  }
+.vite {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(138, 43, 226, 0.5) 15%,
+    rgb(138, 43, 226, 0.6) 85%,
+    transparent 95%
+  );
+}
 
-  .express {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(112, 128, 144, 0.5) 15%,
-      rgb(112, 128, 144, 0.6) 85%,
-      transparent 95%
-    );
-  }
+.node {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(143, 197, 62, 0.5) 15%,
+    rgb(143, 197, 62, 0.75) 85%,
+    transparent 95%
+  );
+}
 
-  .mariadb {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(31, 102, 171, 0.5) 15%,
-      rgb(31, 102, 171, 0.75) 85%,
-      transparent 95%
-    );
-  }
+.express {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(112, 128, 144, 0.5) 15%,
+    rgb(112, 128, 144, 0.6) 85%,
+    transparent 95%
+  );
+}
 
-  .php {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(79, 93, 149, 0.5) 15%,
-      rgb(79, 93, 149, 0.75) 85%,
-      transparent 95%
-    );
-  }
+.mariadb {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(31, 102, 171, 0.5) 15%,
+    rgb(31, 102, 171, 0.75) 85%,
+    transparent 95%
+  );
+}
 
-  .slim {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(170, 200, 123, 0.5) 15%,
-      rgb(170, 200, 123) 85%,
-      transparent 95%
-    );
-  }
+.php {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(79, 93, 149, 0.5) 15%,
+    rgb(79, 93, 149, 0.75) 85%,
+    transparent 95%
+  );
+}
 
-  .mongodb {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(85, 158, 106, 0.5) 15%,
-      rgb(85, 158, 106) 85%,
-      transparent 95%
-    );
-  }
+.slim {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(170, 200, 123, 0.5) 15%,
+    rgb(170, 200, 123) 85%,
+    transparent 95%
+  );
+}
 
-  .jest {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(157, 52, 53, 0.6) 15%,
-      rgb(157, 52, 53, 0.75) 85%,
-      transparent 95%
-    );
-  }
+.mongodb {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(85, 158, 106, 0.5) 15%,
+    rgb(85, 158, 106) 85%,
+    transparent 95%
+  );
+}
 
-  .phpunit {
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(99, 93, 174, 0.5) 15%,
-      rgb(99, 93, 174, 0.75) 85%,
-      transparent 95%
-    );
-  }
+.jest {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(157, 52, 53, 0.6) 15%,
+    rgb(157, 52, 53, 0.75) 85%,
+    transparent 95%
+  );
+}
 
-  .linkedin {
-    position: relative;
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(0, 119, 181, 0.5) 15%,
-      rgb(0, 119, 181, 0.75) 85%,
-      transparent 95%
-    );
-  }
+.phpunit {
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(99, 93, 174, 0.5) 15%,
+    rgb(99, 93, 174, 0.75) 85%,
+    transparent 95%
+  );
+}
 
-  .github,
-  .codepen {
-    position: relative;
-    background: linear-gradient(
-      to bottom,
-      transparent 5%,
-      rgb(36, 41, 46, 0.75) 15%,
-      rgb(36, 41, 46) 85%,
-      transparent 95%
-    );
-  }
+.linkedin {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(0, 119, 181, 0.5) 15%,
+    rgb(0, 119, 181, 0.75) 85%,
+    transparent 95%
+  );
+}
 
-  .github::after {
-    content: "GitHub.";
-    width: var(--width1, 0%);
-  }
+.github,
+.codepen {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgb(36, 41, 46, 0.75) 15%,
+    rgb(36, 41, 46) 85%,
+    transparent 95%
+  );
+}
 
-  .codepen::after {
-    content: "CodePen,";
-    width: var(--width2, 0%);
-  }
+.github::after {
+  content: "GitHub.";
+  width: var(--width1, 0%);
+}
 
-  .github::after,
-  .codepen::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: var(--paper-bg);
-    height: 100%;
-    overflow: hidden;
-    transition: width 0.5s ease;
-    text-decoration: underline dashed;
-  }
+.codepen::after {
+  content: "CodePen,";
+  width: var(--width2, 0%);
+}
 
-  .no-background {
-    background: none;
-  }
+.github::after,
+.codepen::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--paper-bg);
+  height: 100%;
+  overflow: hidden;
+  transition: width 0.5s ease;
+  text-decoration: underline dashed;
+}
+
+.no-background {
+  background: none;
 }
 
 .codepen:hover,
@@ -448,27 +449,32 @@ img {
 
 .paper .fold:nth-of-type(1) .margin-left {
   justify-content: start;
-  .hole {
+}
+
+.paper .fold:nth-of-type(1) .margin-left .hole {
     background-color: var(--paper-bg);
     transform: scaleY(-1);
-  }
 }
 
 .paper .fold:nth-of-type(2) .margin-left {
   justify-content: space-between;
-  .hole {
+}
+
+.paper .fold:nth-of-type(2) .margin-left .hole {
     background-color: var(--bg);
   }
-}
+
 
 .paper .fold:nth-of-type(3) .margin-left {
   justify-content: end;
   padding-bottom: 25cqh;
-  .hole {
+}
+
+.paper .fold:nth-of-type(3) .margin-left .hole {
     background-color: var(--paper-bg);
     transform: scaleY(-1);
   }
-}
+
 
 @keyframes hole-brightness {
   0% {
@@ -527,49 +533,48 @@ img {
   font-family: Arial, sans-serif;
 }
 
-.cabinet-body {
-  .front {
+
+  .cabinet-body .front {
     background-color: lightgray;
   }
-  .left,
-  .right {
+  .cabinet-body .left,
+  .cabinet-body .right {
     background-color: rgb(190, 190, 190);
   }
-  .top {
+  .cabinet-body .top {
     background-color: rgb(200, 200, 200);
   }
 
-  .top,
-  .side {
+  .cabinet-body .top,
+  .cabinet-body .side {
     border-radius: 2cqw;
   }
 
-  .top {
+  .cabinet-body .top {
     height: 100cqw;
     width: 100cqw;
   }
 
-  .side {
+  .cabinet-body .side {
     height: 100cqh;
     width: 100cqw;
   }
 
-  .front {
+  .cabinet-body .front {
     transform: translateZ(49.5cqw);
   }
 
-  .left {
+  .cabinet-body .left {
     transform: translateX(-49.5cqw) rotateY(-90deg);
   }
 
-  .right {
+  .cabinet-body .right {
     transform: translateX(49.5cqw) rotateY(90deg);
   }
 
-  .top {
+  .cabinet-body .top {
     transform: translateY(-50cqh) rotateX(90deg);
   }
-}
 
 .cabinet-drawer {
   height: 29.4%;
@@ -579,24 +584,25 @@ img {
   transform-style: preserve-3d;
   transform: translateZ(10cqw);
   transition: transform 0.5s ease-in-out;
+}
 
-  .side {
+  .cabinet-drawer .side {
     background-color: rgb(75, 75, 75);
   }
 
-  .front {
+  .cabinet-drawer .front {
     background-color: rgb(195, 198, 200);
     transform-style: preserve-3d;
   }
 
-  .left,
-  .right {
+  .cabinet-drawer .left,
+  .cabinet-drawer .right {
     width: 100cqw;
     height: 80cqh;
   }
 
-  .left::after,
-  .right::after {
+  .cabinet-drawer .left::after,
+  .cabinet-drawer .right::after {
     content: "";
     position: absolute;
     height: 30%;
@@ -605,41 +611,40 @@ img {
     border-bottom: solid 2.5cqw rgb(90, 90, 90);
   }
 
-  .bottom {
+  .cabinet-drawer .bottom {
     width: 100cqw;
     height: 100cqh;
   }
 
-  .front {
+  .cabinet-drawer .front {
     width: 100cqw;
     height: 100cqh;
   }
 
-  .front:hover {
+  .cabinet-drawer .front:hover {
     cursor: pointer;
   }
 
-  .front {
+  .cabinet-drawer .front {
     transform: translateZ(50.5cqw);
   }
 
-  .left {
+  .cabinet-drawer .left {
     transform: translateX(-49.5cqw) translateY(20cqh) rotateY(-90deg);
   }
 
-  .right {
+  .cabinet-drawer .right {
     transform: translateX(49.5cqw) translateY(20cqh) rotateY(90deg);
   }
 
-  .bottom {
+  .cabinet-drawer .bottom {
     transform: translateY(50cqh) rotateX(-90deg);
   }
-}
 
 .shadow {
   height: 29.4%;
   width: 83.33%;
-  background-color: black;
+  background-color: gray;
   transition: background-color 0.1s ease;
 }
 

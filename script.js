@@ -163,15 +163,15 @@ function drawHighlights(paper, includesBlacks = false) {
   });
 }
 
-function openDrawer(drawer) {
-  const shadow = drawer.querySelector(".shadow");
+function openDrawer(drawer, index) {
+  const shadows = document.querySelectorAll(".shadow");
   const isOpen = drawer.classList.toggle("open");
   setTimeout(
     () => {
       drawer.classList.toggle("closed");
-      shadow.style.backgroundColor = "black";
+      shadows[index].style.backgroundColor = isOpen ? 'black' : 'gray';
     },
-    isOpen ? 0 : 600
+    isOpen ? 0 : 450
   );
 }
 
@@ -206,7 +206,7 @@ function pointCabinet(event) {
   let rotateX = 0
   let rotateY = 0;
 
-  if (event.type === "mousemove" && viewportWidth < 768) {
+  if (event.type === "mousemove") {
     rotateX = (event.clientY / viewportHeight).toFixed(2);
     rotateY = (event.clientX / viewportWidth).toFixed(2);
     
@@ -336,8 +336,8 @@ document.addEventListener("mousemove", function (event) {
   pointCabinet(event);
 });
 
-drawers.forEach((drawer) => {
+drawers.forEach((drawer, index) => {
   drawer.addEventListener("click", () => {
-    openDrawer(drawer);
+    openDrawer(drawer, index);
   });
 });
