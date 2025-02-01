@@ -341,3 +341,18 @@ drawers.forEach((drawer, index) => {
     openDrawer(drawer, index);
   });
 });
+
+
+function moveDrawer() {
+  drawerOpen = drawerOpen ? false : true;
+  drawer.style.bottom = drawerOpen ? "0" : "100%";
+}
+
+let drawerOpen = false
+const drawer = document.querySelector(".drawerUI-wrapper");
+
+window.onload = function () {
+  drawer.scrollTop = drawer.scrollHeight
+}
+
+window.addEventListener("click", moveDrawer)

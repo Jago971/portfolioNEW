@@ -67,7 +67,7 @@ h1:first-of-type:not(.click-me) {
   margin-top: -6cqh;
 }
 
-p {
+p:not(.drawerUI p) {
   line-height: calc((100cqh / 12) * 2);
   font-size: calc((100cqh / 12) * 1.25);
   font-family: indie flower;
@@ -262,7 +262,7 @@ p > span {
   text-decoration: underline dashed;
 }
 
-p:first-of-type {
+p:not(.drawerUI p):first-of-type {
   margin-top: 4cqh;
 }
 
@@ -453,8 +453,8 @@ img {
 }
 
 .paper .fold:nth-of-type(1) .margin-left .hole {
-    background-color: var(--paper-bg);
-    transform: rotateX(180deg);
+  background-color: var(--paper-bg);
+  transform: rotateX(180deg);
 }
 
 .paper .fold:nth-of-type(2) .margin-left {
@@ -462,9 +462,8 @@ img {
 }
 
 .paper .fold:nth-of-type(2) .margin-left .hole {
-    background-color: var(--bg);
-  }
-
+  background-color: var(--bg);
+}
 
 .paper .fold:nth-of-type(3) .margin-left {
   justify-content: end;
@@ -472,10 +471,9 @@ img {
 }
 
 .paper .fold:nth-of-type(3) .margin-left .hole {
-    background-color: var(--paper-bg);
-    transform: rotateX(180deg);
-  }
-
+  background-color: var(--paper-bg);
+  transform: rotateX(180deg);
+}
 
 @keyframes hole-brightness {
   0% {
@@ -534,48 +532,47 @@ img {
   font-family: Arial, sans-serif;
 }
 
+.cabinet-body .front {
+  background-color: lightgray;
+}
+.cabinet-body .left,
+.cabinet-body .right {
+  background-color: rgb(190, 190, 190);
+}
+.cabinet-body .top {
+  background-color: rgb(200, 200, 200);
+}
 
-  .cabinet-body .front {
-    background-color: lightgray;
-  }
-  .cabinet-body .left,
-  .cabinet-body .right {
-    background-color: rgb(190, 190, 190);
-  }
-  .cabinet-body .top {
-    background-color: rgb(200, 200, 200);
-  }
+.cabinet-body .top,
+.cabinet-body .side {
+  border-radius: 2cqw;
+}
 
-  .cabinet-body .top,
-  .cabinet-body .side {
-    border-radius: 2cqw;
-  }
+.cabinet-body .top {
+  height: 100cqw;
+  width: 100cqw;
+}
 
-  .cabinet-body .top {
-    height: 100cqw;
-    width: 100cqw;
-  }
+.cabinet-body .side {
+  height: 100cqh;
+  width: 100cqw;
+}
 
-  .cabinet-body .side {
-    height: 100cqh;
-    width: 100cqw;
-  }
+.cabinet-body .front {
+  transform: translateZ(49.5cqw);
+}
 
-  .cabinet-body .front {
-    transform: translateZ(49.5cqw);
-  }
+.cabinet-body .left {
+  transform: translateX(-49.5cqw) rotateY(-90deg);
+}
 
-  .cabinet-body .left {
-    transform: translateX(-49.5cqw) rotateY(-90deg);
-  }
+.cabinet-body .right {
+  transform: translateX(49.5cqw) rotateY(90deg);
+}
 
-  .cabinet-body .right {
-    transform: translateX(49.5cqw) rotateY(90deg);
-  }
-
-  .cabinet-body .top {
-    transform: translateY(-50cqh) rotateX(90deg);
-  }
+.cabinet-body .top {
+  transform: translateY(-50cqh) rotateX(90deg);
+}
 
 .cabinet-drawer {
   height: 29.4%;
@@ -587,60 +584,60 @@ img {
   transition: transform 0.5s ease-in-out;
 }
 
-  .cabinet-drawer .side {
-    background-color: rgb(75, 75, 75);
-  }
+.cabinet-drawer .side {
+  background-color: rgb(75, 75, 75);
+}
 
-  .cabinet-drawer .front {
-    background-color: rgb(195, 198, 200);
-    transform-style: preserve-3d;
-  }
+.cabinet-drawer .front {
+  background-color: rgb(195, 198, 200);
+  transform-style: preserve-3d;
+}
 
-  .cabinet-drawer .left,
-  .cabinet-drawer .right {
-    width: 100cqw;
-    height: 80cqh;
-  }
+.cabinet-drawer .left,
+.cabinet-drawer .right {
+  width: 100cqw;
+  height: 80cqh;
+}
 
-  .cabinet-drawer .left::after,
-  .cabinet-drawer .right::after {
-    content: "";
-    position: absolute;
-    height: 30%;
-    width: 100%;
-    border-top: solid 5cqw rgb(60, 60, 60);
-    border-bottom: solid 2.5cqw rgb(90, 90, 90);
-  }
+.cabinet-drawer .left::after,
+.cabinet-drawer .right::after {
+  content: "";
+  position: absolute;
+  height: 30%;
+  width: 100%;
+  border-top: solid 5cqw rgb(60, 60, 60);
+  border-bottom: solid 2.5cqw rgb(90, 90, 90);
+}
 
-  .cabinet-drawer .bottom {
-    width: 100cqw;
-    height: 100cqh;
-  }
+.cabinet-drawer .bottom {
+  width: 100cqw;
+  height: 100cqh;
+}
 
-  .cabinet-drawer .front {
-    width: 100cqw;
-    height: 100cqh;
-  }
+.cabinet-drawer .front {
+  width: 100cqw;
+  height: 100cqh;
+}
 
-  .cabinet-drawer .front:hover {
-    cursor: pointer;
-  }
+.cabinet-drawer .front:hover {
+  cursor: pointer;
+}
 
-  .cabinet-drawer .front {
-    transform: translateZ(50.5cqw);
-  }
+.cabinet-drawer .front {
+  transform: translateZ(50.5cqw);
+}
 
-  .cabinet-drawer .left {
-    transform: translateX(-49.5cqw) translateY(20cqh) rotateY(-90deg);
-  }
+.cabinet-drawer .left {
+  transform: translateX(-49.5cqw) translateY(20cqh) rotateY(-90deg);
+}
 
-  .cabinet-drawer .right {
-    transform: translateX(49.5cqw) translateY(20cqh) rotateY(90deg);
-  }
+.cabinet-drawer .right {
+  transform: translateX(49.5cqw) translateY(20cqh) rotateY(90deg);
+}
 
-  .cabinet-drawer .bottom {
-    transform: translateY(50cqh) rotateX(-90deg);
-  }
+.cabinet-drawer .bottom {
+  transform: translateY(50cqh) rotateX(-90deg);
+}
 
 .shadow {
   height: 29.4%;
@@ -679,7 +676,6 @@ img {
     #5a5a5a
   );
   border: solid 1px black;
-  transform: translateZ(7.5cqw);
   box-shadow: 0 3cqw 3cqw rgba(0, 0, 0, 0.5), inset 0 1cqw 2cqw white;
 }
 
@@ -754,4 +750,168 @@ img {
     width: 45vw;
     height: 127.5vw;
   }
+}
+
+/* ---------- folderUI overlay ---------- */
+
+.drawerUI-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  container-type: size;
+  bottom: 100%;
+  transition: bottom 1s ease;
+  z-index: 5;
+}
+
+.drawerUI {
+  padding-top: 5cqw;
+  height: fit-content;
+  min-height: 80%;
+  width: 75%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(179, 179, 179);
+  border-left: solid 2.5cqw gray;
+  border-right: solid 2.5cqw gray;
+  box-shadow: 0 0 0 1.5cqw lightgray;
+  margin-bottom: 20cqw;
+  align-content: end;
+}
+
+.drawerUi-drawer-front {
+  position: absolute;
+  width: calc(100% + 23cqw);
+  bottom: -17cqw;
+  left: -11.5cqw;
+  border-left: solid transparent 9cqw;
+  border-right: solid transparent 9cqw;
+  border-top: solid 15cqw gray;
+  box-shadow: 0 -2cqw 0 0 lightgray;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  z-index: 1;
+}
+
+.drawerUi-drawer-tag, .drawerUi-drawer-handle {
+  transform-origin: bottom center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotateX(-70deg);
+}
+
+.drawerUi-drawer-tag {
+  bottom: 7.5cqw;
+  height: 15cqw;
+  width: 40cqw;
+  background-color: white;
+  border: solid 2px gray;
+  border-radius: 1cqw;
+  font-size: 11cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drawerUi-drawer-handle {
+  bottom: 2cqw;
+  width: 25cqw;
+  height: 10cqw;
+  background: linear-gradient(
+    to right,
+    #5a5a5a,
+    #9c9c9c 20%,
+    #9c9c9c 80%,
+    #5a5a5a
+  );
+  border: solid 1px black;
+  box-shadow: 0 3cqw 3cqw rgba(0, 0, 0, 0.5), inset 0 4cqw 2cqw white;
+}
+
+.drawerUi-folder {
+  height: 10cqw;
+  position: relative;
+  margin-bottom: 2cqw;
+}
+
+.drawerUi-folder-back, .drawerUi-folder-front, .drawerUi-folder-paper, .drawerUi-folder-paper::after, .drawerUi-folder-paper::before {
+  position: absolute;
+  box-shadow: 0 0 0.5cqw black;
+}
+
+.drawerUi-folder-back, .drawerUi-folder-front {
+  background-color: rgb(240, 233, 136);
+  width: 98%;
+  left: 1%
+}
+
+.drawerUi-folder-front {
+  border-radius: 0 1cqw 0 0;
+  bottom: -80%;
+  height: 100%;
+  filter: drop-shadow(0 0.25cqw 0.25cqw rgba(0, 0, 0, 0.75));
+}
+
+.drawerUi-folder-back {
+  border-radius: 1cqw 1cqw 0 0;
+  height: 100%;
+  top: 0;
+  filter: brightness(0.85);
+  box-shadow: 0 0 1cqw black;
+}
+
+.drawerUi-folder-paper {
+  width: 90%;
+  top: 20%;
+  left: 5%;
+  background-color: white;
+  height: 20%;
+}
+
+.drawerUi-folder-paper::after, .drawerUi-folder-paper::before {
+  content: "";
+  height: 100%;
+  background-color: white;
+}
+
+.drawerUi-folder-paper::before {
+width: 102%;
+left: -1%;
+bottom: -100%;
+}
+
+.drawerUi-folder-paper::after {
+  width: 104%;
+  left: -2%;
+  bottom: -200%;
+  }
+
+.drawerUi-folder-front .drawerUi-folder-tag {
+  padding: 1cqw;
+  position: absolute;
+  min-width: 33%;
+  height: 40%;
+  background-color: rgb(240, 233, 136);
+
+  top: -35%;
+  border-radius: 1cqw 1cqw 0 0;
+}
+
+.drawerUi-folder-tag p {
+  padding: 0 1cqw;
+  background-color: white;
+  text-align: center;
+  font-size: 4cqw;
+  border-radius: 0.5cqw;
+}
+
+.drawerUi-folder:hover {
+  cursor: pointer;
+}
+
+.drawerUi-folder:hover > * {
+  transform: translateY(-2.5cqw);
+  transition: transform 0.1s ease-out;
 }
