@@ -169,7 +169,7 @@ function openDrawer(drawer, index) {
   setTimeout(
     () => {
       drawer.classList.toggle("closed");
-      shadows[index].style.backgroundColor = isOpen ? 'black' : 'gray';
+      shadows[index].style.backgroundColor = isOpen ? "black" : "gray";
     },
     isOpen ? 0 : 450
   );
@@ -203,24 +203,27 @@ function pointCabinet(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  let rotateX = 0
+  let rotateX = 0;
   let rotateY = 0;
 
   if (event.type === "mousemove") {
     rotateX = (event.clientY / viewportHeight).toFixed(2);
     rotateY = (event.clientX / viewportWidth).toFixed(2);
-    
-    cabinet.style.transform = `rotateX(${
-      7.5 * rotateX * -1 - 20
-    }deg) rotateY(${45 * rotateY - 22.5}deg)`;
 
+    cabinet.style.transform = `rotateX(${7.5 * rotateX * -1 - 20}deg) rotateY(${
+      45 * rotateY - 22.5
+    }deg)`;
   } else if (event.type === "deviceorientation") {
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const { gamma, beta } = event;
-    rotateX = -beta + 45
-    rotateY = gamma
+    rotateX = -beta + 45;
+    rotateY = gamma;
 
-    cabinet.style.transform = `rotateX(${clamp(rotateX, -45, 10)}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
+    cabinet.style.transform = `rotateX(${clamp(
+      rotateX,
+      -45,
+      10
+    )}deg) rotateY(${clamp(rotateY, -45, 45)}deg)`;
   }
 }
 
@@ -290,7 +293,9 @@ function permission() {
     DeviceMotionEvent.requestPermission()
       .then((response) => {
         if (response === "granted") {
-          window.addEventListener("deviceorientation", (event) => {pointCabinet(event)});
+          window.addEventListener("deviceorientation", (event) => {
+            pointCabinet(event);
+          });
         } else {
           alert("Permission denied. Unable to access device motion data.");
         }
@@ -300,7 +305,7 @@ function permission() {
       });
   } else if ("DeviceMotionEvent" in window) {
     window.addEventListener("deviceorientation", (event) => {
-      pointCabinet(event)
+      pointCabinet(event);
     });
   } else {
     alert("DeviceMotionEvent is not supported on this device or browser.");
@@ -321,14 +326,13 @@ function permission() {
 papers.forEach((paper, index) => {
   const fold = paper.querySelector(".fold");
   fold.addEventListener("click", () => {
-    if(clickCount === 0) {
+    if (clickCount === 0) {
       permission();
     }
     if (clickCount === index) {
       unfoldPaper(paper, index);
     }
-    if(clickCount < 3)
-    clickCount++;
+    if (clickCount < 3) clickCount++;
   });
 });
 
@@ -342,17 +346,23 @@ drawers.forEach((drawer, index) => {
   });
 });
 
-
-function moveDrawer() {
-  drawerOpen = drawerOpen ? false : true;
-  drawer.style.bottom = drawerOpen ? "0" : "100%";
+function moveDrawer(action) {
+  if (action === "close") {
+    drawer.style.bottom = "100%";
+    setTimeout(() => {
+      sections[0].style.opacity = "100%";
+    }, 500);
+  } else if (action === "open") {
+    drawer.scrollTop = drawer.scrollHeight;
+    drawer.style.bottom = "0";
+    sections[0].style.opacity = "0";
+  }
 }
 
-let drawerOpen = false
 const drawer = document.querySelector(".drawerUI-wrapper");
+const drawerFront = document.querySelector(".drawer-hitbox")
 
-window.onload = function () {
-  drawer.scrollTop = drawer.scrollHeight
-}
-
-window.addEventListener("click", moveDrawer)
+drawers.forEach(drawer => {
+  drawer.addEventListener("click", () => {moveDrawer("open")});
+});
+drawerFront.addEventListener("click", () => {moveDrawer("close")})

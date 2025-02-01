@@ -282,6 +282,7 @@ section {
   height: 100%;
   scroll-snap-align: center;
   scroll-snap-stop: always;
+  transition: opacity 0.25s linear;
 }
 
 section:has(.cabinet) {
@@ -756,13 +757,19 @@ img {
 
 .drawerUI-wrapper {
   height: 100%;
-  width: 100%;
+  width: 33%;
   overflow: auto;
   position: absolute;
   container-type: size;
   bottom: 100%;
   transition: bottom 1s ease;
   z-index: 5;
+}
+
+@media screen and (max-width: 768px) {
+  .drawerUI-wrapper {
+    width: 100%;
+  }
 }
 
 .drawerUI {
@@ -793,6 +800,19 @@ img {
   transform-style: preserve-3d;
   perspective: 1000px;
   z-index: 1;
+}
+
+.drawer-hitbox {
+  width: 110%;
+  position: absolute;
+  height: 13cqw;
+  bottom: 1cqw;
+  left: -5%;
+  transform: translateZ(15cqw);
+}
+
+.drawer-hitbox:hover {
+  cursor: pointer;
 }
 
 .drawerUi-drawer-tag, .drawerUi-drawer-handle {
