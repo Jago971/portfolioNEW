@@ -251,6 +251,10 @@ drawLines();
 
 permission();
 
+window.onload = function () {
+  drawer.scrollTop = drawer.scrollHeight
+}
+
 window.addEventListener("resize", () => {
   drawLines();
   deviceLayout(window.innerWidth);
@@ -350,19 +354,22 @@ function moveDrawer(action) {
   if (action === "close") {
     drawer.style.bottom = "100%";
     setTimeout(() => {
-      sections[0].style.opacity = "100%";
+      sections[0].style.opacity = "1";
     }, 500);
   } else if (action === "open") {
-    drawer.scrollTop = drawer.scrollHeight;
+    // drawer.scrollTop = drawer.scrollHeight;
     drawer.style.bottom = "0";
     sections[0].style.opacity = "0";
   }
 }
 
 const drawer = document.querySelector(".drawerUI-wrapper");
-const drawerFront = document.querySelector(".drawer-hitbox")
+// const drawerFront = document.querySelector(".drawer-hitbox")
 
 drawers.forEach(drawer => {
-  drawer.addEventListener("click", () => {moveDrawer("open")});
+  drawer.addEventListener("click", () => {
+    moveDrawer("open")
+    console.log("working")
+  });
 });
-drawerFront.addEventListener("click", () => {moveDrawer("close")})
+// drawerFront.addEventListener("click", () => {moveDrawer("close")})
