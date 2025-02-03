@@ -239,8 +239,10 @@ const content = {
 
 const wrapper = document.querySelector(".wrapper");
 const sections = document.querySelectorAll("section");
-const papers = document.querySelectorAll(".paper");
+const papers = document.querySelectorAll("section > .paper");
 const drawers = document.querySelectorAll(".cabinet-drawer");
+const documentUI = document.querySelector(".documentUI");
+const documents = document.querySelectorAll(".document")
 let clickCount = 0;
 
 // ---------- onload ---------- //
@@ -354,22 +356,43 @@ function moveDrawer(action) {
   if (action === "close") {
     drawer.style.bottom = "100%";
     setTimeout(() => {
-      sections[0].style.opacity = "1";
+      sections[innerWidth > 768 ? 0 : 2].style.opacity = "1";
     }, 500);
   } else if (action === "open") {
-    // drawer.scrollTop = drawer.scrollHeight;
     drawer.style.bottom = "0";
-    sections[0].style.opacity = "0";
+    sections[window.innerWidth > 768 ? 0 : 2].style.opacity = "0";
+  }
+}
+
+function pickDocument(action) {
+  if (action === "close") {
+    documentUI.style.bottom = "100%";
+    setTimeout(() => {
+      sections[1].style.opacity = "1";
+    }, 500);
+  } else if (action === "open") {
+    documentUI.style.bottom = "0";
+    sections[1].style.opacity = "0";
   }
 }
 
 const drawer = document.querySelector(".drawerUI-wrapper");
-// const drawerFront = document.querySelector(".drawer-hitbox")
+const drawerFront = document.querySelector(".drawerUI-hitbox")
 
 drawers.forEach(drawer => {
   drawer.addEventListener("click", () => {
     moveDrawer("open")
-    console.log("working")
   });
 });
-// drawerFront.addEventListener("click", () => {moveDrawer("close")})
+
+documents.forEach(element => {
+  element.addEventListener("click", () => {
+    pickDocument("open")
+  })
+});
+
+documentUI.addEventListener("click", () => {
+  pickDocument("close")
+})
+
+drawerFront.addEventListener("click", () => {moveDrawer("close")})
