@@ -757,7 +757,7 @@ img {
 
 .drawerUI-wrapper {
   height: 100%;
-  width: 100%;
+  width: 33.33%;
   overflow: auto;
   position: absolute;
   container-type: size;
