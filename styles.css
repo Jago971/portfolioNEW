@@ -764,6 +764,11 @@ img {
   bottom: 100%;
   transition: bottom 1s ease;
   z-index: 5;
+  scrollbar-width: none;
+}
+
+.drawerUI-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .drawerUI {
@@ -798,7 +803,6 @@ img {
 .drawerUI-hitbox {
   position: absolute;
   z-index: 1;
-  border: solid 1px red;
   width: calc(100% + 18cqw);
   height: 17cqw;
   bottom: 0;
@@ -820,7 +824,7 @@ img {
 .drawerUi-drawer-tag {
   bottom: 7.5cqw;
   height: 15cqw;
-  width: 40cqw;
+  width: 60cqw;
   background-color: white;
   border: solid 2px gray;
   border-radius: 1cqw;
@@ -992,4 +996,8 @@ img {
   .documentUI {
     width: 100%;
   }
+}
+
+.drawerUI-wrapper.openDrawer {
+  bottom: 0
 }

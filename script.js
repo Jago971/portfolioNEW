@@ -163,17 +163,17 @@ function drawHighlights(paper, includesBlacks = false) {
   });
 }
 
-function openDrawer(drawer, index) {
-  const shadows = document.querySelectorAll(".shadow");
-  const isOpen = drawer.classList.toggle("open");
-  setTimeout(
-    () => {
-      drawer.classList.toggle("closed");
-      shadows[index].style.backgroundColor = isOpen ? "black" : "gray";
-    },
-    isOpen ? 0 : 450
-  );
-}
+// function openDrawer(drawer, index) {
+//   const shadows = document.querySelectorAll(".shadow");
+//   const isOpen = drawer.classList.toggle("open");
+//   setTimeout(
+//     () => {
+//       drawer.classList.toggle("closed");
+//       shadows[index].style.backgroundColor = isOpen ? "black" : "gray";
+//     },
+//     isOpen ? 0 : 450
+//   );
+// }
 
 // ---------- perspective ---------- //
 
@@ -242,7 +242,7 @@ const sections = document.querySelectorAll("section");
 const papers = document.querySelectorAll("section > .paper");
 const drawers = document.querySelectorAll(".cabinet-drawer");
 const documentUI = document.querySelector(".documentUI");
-const documents = document.querySelectorAll(".document")
+const documents = document.querySelectorAll(".document");
 let clickCount = 0;
 
 // ---------- onload ---------- //
@@ -252,10 +252,6 @@ deviceLayout(window.innerWidth);
 drawLines();
 
 permission();
-
-window.onload = function () {
-  drawer.scrollTop = drawer.scrollHeight
-}
 
 window.addEventListener("resize", () => {
   drawLines();
@@ -346,53 +342,94 @@ document.addEventListener("mousemove", function (event) {
   pointCabinet(event);
 });
 
-drawers.forEach((drawer, index) => {
-  drawer.addEventListener("click", () => {
-    openDrawer(drawer, index);
-  });
-});
+// drawers.forEach((drawer, index) => {
+//   drawer.addEventListener("click", () => {
+//     openDrawer(drawer, index);
+//   });
+// });
 
-function moveDrawer(action) {
-  if (action === "close") {
-    drawer.style.bottom = "100%";
+// function moveDrawer(action) {
+//   if (action === "close") {
+//     drawer.style.bottom = "100%";
+//     setTimeout(() => {
+//       sections[innerWidth > 768 ? 0 : 2].style.opacity = "1";
+//     }, 500);
+//   } else if (action === "open") {
+//     drawer.style.bottom = "0";
+//     sections[window.innerWidth > 768 ? 0 : 2].style.opacity = "0";
+//   }
+// }
+
+// function pickDocument(action) {
+//   if (action === "close") {
+//     documentUI.style.bottom = "100%";
+//     setTimeout(() => {
+//       sections[1].style.opacity = "1";
+//     }, 500);
+//   } else if (action === "open") {
+//     documentUI.style.bottom = "0";
+//     sections[1].style.opacity = "0";
+//   }
+// }
+
+const drawerUI = document.querySelector(".drawerUI-wrapper");
+const drawerFront = document.querySelector(".drawerUI-hitbox");
+
+// drawers.forEach((drawer, index) => {
+//   drawer.addEventListener("click", () => {
+//     moveDrawer("open")
+//     console.log(index)
+//   });
+// });
+
+// documents.forEach(element => {
+//   element.addEventListener("click", () => {
+//     pickDocument("open")
+//   })
+// });
+
+// documentUI.addEventListener("click", () => {
+//   pickDocument("close")
+// })
+
+// drawerFront.addEventListener("click", () => {
+//   moveDrawer("close")
+//   openDrawer()
+// })
+
+let selectedDrawer = "unselected"
+
+function openDrawer(element, index) {
+  const drawerText = document.querySelector(".drawerUi-drawer-tag > p")
+  const drawerValue = element.dataset.id;
+
+  drawerUI.scrollTop = drawerUI.scrollHeight;
+
+  if (selectedDrawer === "unselected") {
+    drawerText.textContent = drawerValue
+    drawerUI.classList.toggle("openDrawer");
+    selectedDrawer = index
+  } else if (selectedDrawer === index){
+    drawerUI.classList.toggle("openDrawer");
+    selectedDrawer = "unselected"
+  } else {
+    drawerUI.classList.toggle("openDrawer");
+    selectedDrawer = "unselected"
     setTimeout(() => {
-      sections[innerWidth > 768 ? 0 : 2].style.opacity = "1";
-    }, 500);
-  } else if (action === "open") {
-    drawer.style.bottom = "0";
-    sections[window.innerWidth > 768 ? 0 : 2].style.opacity = "0";
+      openDrawer(element, index)
+    }, 1000);
   }
 }
 
-function pickDocument(action) {
-  if (action === "close") {
-    documentUI.style.bottom = "100%";
-    setTimeout(() => {
-      sections[1].style.opacity = "1";
-    }, 500);
-  } else if (action === "open") {
-    documentUI.style.bottom = "0";
-    sections[1].style.opacity = "0";
-  }
-}
-
-const drawer = document.querySelector(".drawerUI-wrapper");
-const drawerFront = document.querySelector(".drawerUI-hitbox")
-
-drawers.forEach(drawer => {
-  drawer.addEventListener("click", () => {
-    moveDrawer("open")
-  });
-});
-
-documents.forEach(element => {
+drawers.forEach((element, index) => {
   element.addEventListener("click", () => {
-    pickDocument("open")
-  })
+    openDrawer(element, index);
+  });
 });
 
-documentUI.addEventListener("click", () => {
-  pickDocument("close")
-})
 
-drawerFront.addEventListener("click", () => {moveDrawer("close")})
+const fileStructureObject = {
+  "about": "about",
+  "projects": "projects",
+  "activity": "activity"
+}
