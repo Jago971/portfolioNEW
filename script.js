@@ -389,10 +389,10 @@ const drawerFront = document.querySelector(".drawerUI-hitbox");
 //   pickDocument("close")
 // })
 
-// drawerFront.addEventListener("click", () => {
-//   moveDrawer("close")
-//   openDrawer()
-// })
+drawerFront.addEventListener("click", () => {
+  drawerUIWrapper.classList.toggle("openDrawer");
+  selectedDrawer = "unselected"
+})
 
 function openDrawer(element, index) {
   const drawerUIText = document.querySelector(".drawerUi-drawer-tag > p");
@@ -436,6 +436,10 @@ function loadDrawer(element) {
       const newDocument = newFolder.querySelector(".document:last-of-type")
       const title = newDocument.querySelector("p");
       title.textContent = value[index]
+      title.dataset.id = value[index]
+      title.addEventListener("click", () => {
+        console.log(title.dataset.id)
+      })
     }
     
   }
@@ -472,3 +476,5 @@ drawers.forEach((element, index) => {
     openDrawer(element, index);
   });
 });
+
+
