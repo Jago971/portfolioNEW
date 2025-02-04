@@ -163,18 +163,6 @@ function drawHighlights(paper, includesBlacks = false) {
   });
 }
 
-// function openDrawer(drawer, index) {
-//   const shadows = document.querySelectorAll(".shadow");
-//   const isOpen = drawer.classList.toggle("open");
-//   setTimeout(
-//     () => {
-//       drawer.classList.toggle("closed");
-//       shadows[index].style.backgroundColor = isOpen ? "black" : "gray";
-//     },
-//     isOpen ? 0 : 450
-//   );
-// }
-
 // ---------- perspective ---------- //
 
 // function pointElement(event, range, element) {
@@ -404,13 +392,16 @@ function openDrawer(element, index) {
   drawerUIWrapper.scrollTop = drawerUIWrapper.scrollHeight;
 
   if (selectedDrawer === "unselected") {
+    openDrawer3D(element, index)
     drawerUIText.textContent = drawerUIValue;
     drawerUIWrapper.classList.toggle("openDrawer");
     sections[window.innerWidth > 768 ? 0 : 2].classList.add("fade-out");
     selectedDrawer = index;
   } else if (selectedDrawer === index) {
+    openDrawer3D(element, index)
     drawerUIWrapper.classList.toggle("openDrawer");
     setTimeout(() => {
+      openDrawer3D(element, index)
       sections[window.innerWidth > 768 ? 0 : 2].classList.toggle("fade-out");
     }, 500);
     selectedDrawer = "unselected";
@@ -421,6 +412,18 @@ function openDrawer(element, index) {
       openDrawer(element, index);
     }, 1000);
   }
+}
+
+function openDrawer3D(drawer, index) {
+  const shadows = document.querySelectorAll(".shadow");
+  const isOpen = drawer.classList.toggle("open");
+  setTimeout(
+    () => {
+      drawer.classList.toggle("closed");
+      shadows[index].style.backgroundColor = isOpen ? "black" : "gray";
+    },
+    isOpen ? 0 : 450
+  );
 }
 
 function loadDrawer(element) {
