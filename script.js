@@ -328,9 +328,6 @@ function permission() {
 papers.forEach((paper, index) => {
   const fold = paper.querySelector(".fold");
   fold.addEventListener("click", () => {
-    if (clickCount === 0) {
-      permission();
-    }
     if (clickCount === index) {
       unfoldPaper(paper, index);
     }
@@ -372,7 +369,7 @@ document.addEventListener("mousemove", function (event) {
 //   }
 // }
 
-const drawerUI = document.querySelector(".drawerUI-wrapper");
+const drawerUIWrapper = document.querySelector(".drawerUI-wrapper");
 const drawerFront = document.querySelector(".drawerUI-hitbox");
 
 // drawers.forEach((drawer, index) => {
@@ -397,39 +394,81 @@ const drawerFront = document.querySelector(".drawerUI-hitbox");
 //   openDrawer()
 // })
 
-let selectedDrawer = "unselected"
-
 function openDrawer(element, index) {
-  const drawerText = document.querySelector(".drawerUi-drawer-tag > p")
-  const drawerValue = element.dataset.id;
+  const drawerUIText = document.querySelector(".drawerUi-drawer-tag > p");
+  const drawerUIValue = element.dataset.id;
 
-  drawerUI.scrollTop = drawerUI.scrollHeight;
+  drawerUIWrapper.scrollTop = drawerUIWrapper.scrollHeight;
 
   if (selectedDrawer === "unselected") {
-    drawerText.textContent = drawerValue
-    drawerUI.classList.toggle("openDrawer");
-    selectedDrawer = index
-  } else if (selectedDrawer === index){
-    drawerUI.classList.toggle("openDrawer");
-    selectedDrawer = "unselected"
-  } else {
-    drawerUI.classList.toggle("openDrawer");
-    selectedDrawer = "unselected"
+    drawerUIText.textContent = drawerUIValue;
+    drawerUIWrapper.classList.toggle("openDrawer");
+    sections[window.innerWidth > 768 ? 0 : 2].classList.add("fade-out");
+    selectedDrawer = index;
+  } else if (selectedDrawer === index) {
+    drawerUIWrapper.classList.toggle("openDrawer");
     setTimeout(() => {
-      openDrawer(element, index)
+      sections[window.innerWidth > 768 ? 0 : 2].classList.toggle("fade-out");
+    }, 500);
+    selectedDrawer = "unselected";
+  } else {
+    drawerUIWrapper.classList.toggle("openDrawer");
+    selectedDrawer = "unselected";
+    setTimeout(() => {
+      openDrawer(element, index);
     }, 1000);
   }
 }
 
+function loadDrawer(element) {
+  const drawerUIValue = element.dataset.id;
+  const drawerContents = fileStructureObject[drawerUIValue.toLowerCase()];
+  const drawerUI = drawerUIWrapper.querySelector(".drawerUI");
+  for (const [key, value] of Object.entries(drawerContents)) {
+    drawerUI.insertAdjacentHTML("afterbegin", newFolderElement);
+    const newFolder = drawerUI.querySelector(".drawerUI-folder:first-of-type")
+    const tag = newFolder.querySelector(".drawerUI-folder-tag > p");
+    tag.textContent = key;
+
+    for (let index = 0; index < value.length; index++) {
+      const documentContainer = newFolder.querySelector(".documents-container")
+      documentContainer.insertAdjacentHTML("beforeend", newDocumentElement)
+      const newDocument = newFolder.querySelector(".document:last-of-type")
+      const title = newDocument.querySelector("p");
+      title.textContent = value[index]
+    }
+    
+  }
+}
+
+let selectedDrawer = "unselected";
+
+const newFolderElement = `
+<div class="drawerUI-folder">
+  <div class="documents-container"></div>
+  <div class="drawerUI-folder-front">
+    <div class="drawerUI-folder-tag">
+      <p></p>
+    </div>
+  </div>
+</div>
+`;
+const newDocumentElement = `<div class="document"><p class="document-text"></p></div>`;
+
+const fileStructureObject = {
+  about: {
+    info: ["profile", "interests", "hobbies"],
+    education: ["coding", "school", "extra"],
+    cv: ["CV & download"],
+    contact: ["social media", "contact form"],
+  },
+  projects: {"spotlight": [1,2,3], "javascript": [1,2,3]},
+  activity: {"January-25": [1,2,3]}
+};
+
 drawers.forEach((element, index) => {
   element.addEventListener("click", () => {
+    loadDrawer(drawers[index]);
     openDrawer(element, index);
   });
 });
-
-
-const fileStructureObject = {
-  "about": "about",
-  "projects": "projects",
-  "activity": "activity"
-}

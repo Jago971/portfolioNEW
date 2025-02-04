@@ -775,6 +775,7 @@ img {
   position: relative;
   margin-bottom: 25cqw;
   width: 75cqw;
+  min-height: calc(100% - 30cqw);
   padding-top: 5cqw;
   left: 50%;
   transform: translateX(-50%);
@@ -928,9 +929,8 @@ img {
   cursor: pointer;
 }
 
-.document::after {
+.document-text {
   padding: 0 1cqw;
-  content: "test1";
   font-size: 7cqw;
   position: absolute;
   width: 100%;
@@ -1000,4 +1000,8 @@ img {
 
 .drawerUI-wrapper.openDrawer {
   bottom: 0
+}
+
+.fade-out {
+  opacity: 0;
 }
