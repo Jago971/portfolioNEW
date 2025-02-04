@@ -391,8 +391,11 @@ const drawerFront = document.querySelector(".drawerUI-hitbox");
 
 drawerFront.addEventListener("click", () => {
   drawerUIWrapper.classList.toggle("openDrawer");
-  selectedDrawer = "unselected"
-})
+  selectedDrawer = "unselected";
+  setTimeout(() => {
+    sections[window.innerWidth > 768 ? 0 : 2].classList.toggle("fade-out");
+  }, 500);
+});
 
 function openDrawer(element, index) {
   const drawerUIText = document.querySelector(".drawerUi-drawer-tag > p");
@@ -426,22 +429,21 @@ function loadDrawer(element) {
   const drawerUI = drawerUIWrapper.querySelector(".drawerUI");
   for (const [key, value] of Object.entries(drawerContents)) {
     drawerUI.insertAdjacentHTML("afterbegin", newFolderElement);
-    const newFolder = drawerUI.querySelector(".drawerUI-folder:first-of-type")
+    const newFolder = drawerUI.querySelector(".drawerUI-folder:first-of-type");
     const tag = newFolder.querySelector(".drawerUI-folder-tag > p");
     tag.textContent = key;
 
     for (let index = 0; index < value.length; index++) {
-      const documentContainer = newFolder.querySelector(".documents-container")
-      documentContainer.insertAdjacentHTML("beforeend", newDocumentElement)
-      const newDocument = newFolder.querySelector(".document:last-of-type")
+      const documentContainer = newFolder.querySelector(".documents-container");
+      documentContainer.insertAdjacentHTML("beforeend", newDocumentElement);
+      const newDocument = newFolder.querySelector(".document:last-of-type");
       const title = newDocument.querySelector("p");
-      title.textContent = value[index]
-      title.dataset.id = value[index]
+      title.textContent = value[index];
+      title.dataset.id = value[index];
       title.addEventListener("click", () => {
-        console.log(title.dataset.id)
-      })
+        console.log(title.dataset.id);
+      });
     }
-    
   }
 }
 
@@ -466,8 +468,8 @@ const fileStructureObject = {
     cv: ["CV & download"],
     contact: ["social media", "contact form"],
   },
-  projects: {"spotlight": [1,2,3], "javascript": [1,2,3]},
-  activity: {"January-25": [1,2,3]}
+  projects: { spotlight: [1, 2, 3], javascript: [1, 2, 3] },
+  activity: { "January-25": [1, 2, 3] },
 };
 
 drawers.forEach((element, index) => {
@@ -476,5 +478,3 @@ drawers.forEach((element, index) => {
     openDrawer(element, index);
   });
 });
-
-
