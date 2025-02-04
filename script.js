@@ -427,6 +427,8 @@ function loadDrawer(element) {
   const drawerUIValue = element.dataset.id;
   const drawerContents = fileStructureObject[drawerUIValue.toLowerCase()];
   const drawerUI = drawerUIWrapper.querySelector(".drawerUI");
+  drawerUI.querySelectorAll(".drawerUI-folder").forEach(e => e.remove());
+  
   for (const [key, value] of Object.entries(drawerContents)) {
     drawerUI.insertAdjacentHTML("afterbegin", newFolderElement);
     const newFolder = drawerUI.querySelector(".drawerUI-folder:first-of-type");
