@@ -687,7 +687,6 @@ img {
   width: 98cqw;
   height: 66cqh;
   background-color: rgb(255, 254, 237);
-  /* transform: translateX(1cqw) translateZ(15cqw); */
 }
 
 .cabinet-drawer .folder.one {
@@ -748,8 +747,8 @@ img {
   }
 
   .cabinet {
-    width: 45vw;
-    height: 127.5vw;
+    width: 40.5vw;
+    height: 114.75vw;
   }
 }
 
