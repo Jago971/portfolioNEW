@@ -378,7 +378,8 @@ const drawerFront = document.querySelector(".drawerUI-hitbox");
 // })
 
 drawerFront.addEventListener("click", () => {
-  drawerUIWrapper.classList.toggle("openDrawer");
+  drawerUIWrapper.classList.toggle("openUIElement");
+  openDrawer3D(selectedDrawer);
   selectedDrawer = "unselected";
   setTimeout(() => {
     sections[window.innerWidth > 768 ? 0 : 2].classList.toggle("fade-out");
@@ -392,34 +393,36 @@ function openDrawer(element, index) {
   drawerUIWrapper.scrollTop = drawerUIWrapper.scrollHeight;
 
   if (selectedDrawer === "unselected") {
-    openDrawer3D(element, index)
+    openDrawer3D(index);
+    loadDrawer(drawers[index]);
     drawerUIText.textContent = drawerUIValue;
-    drawerUIWrapper.classList.toggle("openDrawer");
+    drawerUIWrapper.classList.toggle("openUIElement");
     sections[window.innerWidth > 768 ? 0 : 2].classList.add("fade-out");
     selectedDrawer = index;
   } else if (selectedDrawer === index) {
-    openDrawer3D(element, index)
-    drawerUIWrapper.classList.toggle("openDrawer");
+    openDrawer3D(index);
+    drawerUIWrapper.classList.toggle("openUIElement");
     setTimeout(() => {
-      openDrawer3D(element, index)
       sections[window.innerWidth > 768 ? 0 : 2].classList.toggle("fade-out");
     }, 500);
     selectedDrawer = "unselected";
   } else {
-    drawerUIWrapper.classList.toggle("openDrawer");
+    openDrawer3D(selectedDrawer);
+    drawerUIWrapper.classList.toggle("openUIElement");
     selectedDrawer = "unselected";
     setTimeout(() => {
+      loadDrawer(drawers[index]);
       openDrawer(element, index);
     }, 1000);
   }
 }
 
-function openDrawer3D(drawer, index) {
+function openDrawer3D(index) {
   const shadows = document.querySelectorAll(".shadow");
-  const isOpen = drawer.classList.toggle("open");
+  const isOpen = drawers[index].classList.toggle("open");
   setTimeout(
     () => {
-      drawer.classList.toggle("closed");
+      drawers[index].classList.toggle("closed");
       shadows[index].style.backgroundColor = isOpen ? "black" : "gray";
     },
     isOpen ? 0 : 450
@@ -430,8 +433,8 @@ function loadDrawer(element) {
   const drawerUIValue = element.dataset.id;
   const drawerContents = fileStructureObject[drawerUIValue.toLowerCase()];
   const drawerUI = drawerUIWrapper.querySelector(".drawerUI");
-  drawerUI.querySelectorAll(".drawerUI-folder").forEach(e => e.remove());
-  
+  drawerUI.querySelectorAll(".drawerUI-folder").forEach((e) => e.remove());
+
   for (const [key, value] of Object.entries(drawerContents)) {
     drawerUI.insertAdjacentHTML("afterbegin", newFolderElement);
     const newFolder = drawerUI.querySelector(".drawerUI-folder:first-of-type");
@@ -444,15 +447,36 @@ function loadDrawer(element) {
       const newDocument = newFolder.querySelector(".document:last-of-type");
       const title = newDocument.querySelector("p");
       title.textContent = value[index];
-      title.dataset.id = value[index];
       title.addEventListener("click", () => {
-        console.log(title.dataset.id);
+        openDocumentUI(title, value[index]);
       });
     }
   }
 }
 
+function openDocumentUI(element, id) {
+  console.log(id, selectedDocument);
+  if (selectedDocument === "unselected") {
+    selectedDocument = id;
+    documentUI.classList.toggle("openUIElement");
+    sections[window.innerWidth > 768 ? 1 : 2].classList.add("fade-out");
+  } else if (selectedDocument === id) {
+    selectedDocument = "unselected";
+    documentUI.classList.toggle("openUIElement");
+    setTimeout(() => {
+      sections[window.innerWidth > 768 ? 1 : 2].classList.toggle("fade-out");
+    }, 500);
+  } else {
+    documentUI.classList.toggle("openUIElement");
+    selectedDocument = "unselected";
+    setTimeout(() => {
+      openDocumentUI(element, id)
+    }, 1000);
+  }
+}
+
 let selectedDrawer = "unselected";
+let selectedDocument = "unselected";
 
 const newFolderElement = `
 <div class="drawerUI-folder">
@@ -479,7 +503,12 @@ const fileStructureObject = {
 
 drawers.forEach((element, index) => {
   element.addEventListener("click", () => {
-    loadDrawer(drawers[index]);
     openDrawer(element, index);
+  });
+});
+
+documents.forEach((element) => {
+  element.addEventListener("click", () => {
+    openDocumentUI(element);
   });
 });
